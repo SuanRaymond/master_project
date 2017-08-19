@@ -334,7 +334,7 @@ class api_judge_services{
 							}
 
 							foreach($db as $row){
-								$this->system->upmemberID = $row->MemberID;
+								$this->system->upmemberID = $row->memberID;
 							}
 						}
 					}
