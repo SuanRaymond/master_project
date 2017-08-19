@@ -36,6 +36,12 @@ class api_respone_services
 					$OutPut_Array['Result'] = $_system->result;
 					$OutPut_Array['Token'] = $_system->token;
 					break;
+				case 'GetMenu':
+					$OutPut_Array['Menu'] = $_system->menu;
+					break;
+				case 'GetMenuCommodity':
+					$OutPut_Array['MenuCommodity'] = $_system->menuCommodity;
+					break;
 			}
 		}
 		else{

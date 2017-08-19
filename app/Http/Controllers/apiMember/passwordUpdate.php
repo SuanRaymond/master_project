@@ -52,7 +52,11 @@ class passwordUpdate extends Controller
             $this->system->result = $row->result;
         }
 
-        if($this->system->result != 0){
+        //密碼錯誤
+        if($this->system->result == 2){
+            with(new api_respone_services())->reAPI(268, $this->system);
+        }
+        else if($this->system->result != 0){
             with(new api_respone_services())->reAPI(501, $this->system);
         }
 

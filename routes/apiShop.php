@@ -6,5 +6,8 @@ Route::any('/', function(){
     abort(404);
 });
 
-//取得選單
+//取Menu
 Route::post('/GetMenu', 'getMenu@index');
+
+//取Menu明細
+Route::post('/GetMenuCommodity', 'getMenuCommodity@index');
