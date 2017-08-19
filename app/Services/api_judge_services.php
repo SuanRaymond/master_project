@@ -237,6 +237,7 @@ class api_judge_services{
 					}
 					//確認回傳資料是不是 JSON
 					if(!isJson($this->system->result)){
+						dd($this->system->result);
 						return $this->respone(271);
 					}
 					//將資料轉換為 Object
@@ -327,7 +328,7 @@ class api_judge_services{
 					//取得會員編號
 					if($this->system->upmemberID != ''){
 						if ($this->system->upmemberID != 0){
-							$db = $member_repository->getMemberID($this->system->upmemberID);
+							$db = $member_repository->checkMemberID($this->system->upmemberID);
 							if(empty($db)){
 								return $this->respone(351);
 							}
