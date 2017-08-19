@@ -46,7 +46,7 @@ class getMenuCommodity extends Controller
         //放入資料區塊
         $this->system->action                 = '[communication_setdata]';
         $this->system->sendParams             = [];
-        $this->system->sendParams['MenuID'] = $this->system->menuID;
+        $this->system->sendParams['MenuID']   = $this->system->menuID;
 
         //送出資料
         $this->system->action    = '[communication_send_post]';

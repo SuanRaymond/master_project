@@ -34,6 +34,10 @@ class getMenuCommodity extends Controller
     public function index()
     {
         $this->system->action = '[judge]';
+
+        if($this->system->menuID == '')
+            $this->system->menuID = null;
+        
         $db = with(new shop_repository())->getMenuCommodity($this->system->menuID);
 
         if(empty($db)){
