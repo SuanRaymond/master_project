@@ -22,7 +22,7 @@ class login extends Controller
         3、比對帳號是否合法
         4、取得 API 內帳號資料
         5、輸出完整資料
-        {"Result":"狀態","Member":{"account":"帳號","name":"暱稱","points":"點數","integral":"積分","bonus":"紅利","ID":"會員編號"}}
+        {"Result":"狀態","Member":{"account":"帳號","name":"暱稱","points":"點數","integral":"積分","bonus":"紅利","memberID":"會員編號","LanguageID":"語言"}
      */
 
     public function __construct()

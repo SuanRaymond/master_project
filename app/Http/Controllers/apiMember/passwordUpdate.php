@@ -43,13 +43,17 @@ class passwordUpdate extends Controller
         $db = with(new member_repository())->updatePassword($this->system->memberID, $this->system->passwordo, $this->system->passwordn);
 
         if(empty($db)){
-            with(new api_respone_services())->reAPI(200, $this->system);
+            with(new api_respone_services())->reAPI(500, $this->system);
         }
 
         //將欄位名稱改變
         $this->system->action = '[reorderdata]';
         foreach($db as $row){
             $this->system->result = $row->result;
+        }
+
+        if($this->system->result != 0){
+            with(new api_respone_services())->reAPI(501, $this->system);
         }
 
     	with(new api_respone_services())->reAPI(0, $this->system);
