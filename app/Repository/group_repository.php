@@ -10,6 +10,6 @@ class group_repository{
      * @param  int $_groupID 權限代碼
      */
     public function checkGroupID($_groupID){
-        return DB::select("EXEC SSP_SetingGroup @_groupID = ?", array($_groupID));
+        return DB::select("SET NOCOUNT ON; EXEC SSP_SetingGroup @_groupID = ?", array($_groupID));
     }
 }

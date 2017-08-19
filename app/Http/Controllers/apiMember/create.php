@@ -46,12 +46,12 @@ class create extends Controller
 
         $this->system->action = '[reorderdata]';
         if(empty($db)){
-            with(new api_respone_services())->reAPI(200, $this->system);
+            with(new api_respone_services())->reAPI(500, $this->system);
         }
         foreach($db as $row){
             $this->system->memberID = $row->memberID;
             if($this->system->memberID < 0){
-                with(new api_respone_services())->reAPI(201, $this->system);
+                with(new api_respone_services())->reAPI(501, $this->system);
             }
         }
 

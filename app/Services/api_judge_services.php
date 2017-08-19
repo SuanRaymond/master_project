@@ -32,76 +32,76 @@ class api_judge_services{
 				case 'CMA':
 					//帳號是否輸入
 			    	if(!isset($this->system->account)){
-			    		return $this->respone(1);
+			    		return $this->respone(120);
 			    	}
 			    	//帳號是否過長
 			    	if(strlen($this->system->account) > 20){
-			    		return $this->respone(2);
+			    		return $this->respone(121);
 					}
 					//帳號是否過短
 					if(strlen($this->system->account) < 6){
-						return $this->respone(3);
+						return $this->respone(122);
 					}
-					// //帳號是否數字
-			  //    	if(!is_numeric($this->system->account)){
-			  //    		return $this->respone(333);
-			  //    	}
+					//帳號是否數字
+			     	if(!is_numeric($this->system->account)){
+			     		return $this->respone(123);
+			     	}
 					break;
 				case 'CPW':
 					//密碼是否輸入
 			    	if(!isset($this->system->password)){
-			    		return $this->respone(4);
+			    		return $this->respone(130);
 			    	}
 			    	//密碼是否過長
 			    	if(strlen($this->system->password) > 20){
-			    		return $this->respone(5);
+			    		return $this->respone(131);
 					}
 					//密碼是否過短
 					if(strlen($this->system->password) < 6){
-						return $this->respone(6);
+						return $this->respone(132);
 					}
 					//密碼是否符合規則
 					if(!preg_match("/^([0-9A-Za-z]+)$/", $this->system->password)){
-			    		return $this->respone(7);
+			    		return $this->respone(133);
 					}
 					break;
 				case 'CMN':
 					//暱稱是否輸入
 			    	if(!isset($this->system->name)){
-			    		return $this->respone(8);
+			    		return $this->respone(140);
 			    	}
 			    	//暱稱是否過長
 			    	if(strlen($this->system->name) > 20){
-			    		return $this->respone(9);
+			    		return $this->respone(141);
 					}
 					//暱稱是否過短
 					if(strlen($this->system->name) < 2){
-						return $this->respone(10);
+						return $this->respone(142);
 					}
 					break;
 				case 'CMM':
 					//信箱是否輸入
 			    	if(!isset($this->system->mail)){
-			    		return $this->respone(11);
+			    		return $this->respone(150);
 			    	}
 			    	//信箱是否過長
 			    	if(strlen($this->system->mail) > 50){
-			    		return $this->respone(12);
+			    		return $this->respone(151);
 					}
 					//信箱是否過短
 					if(strlen($this->system->mail) < 3){
-						return $this->respone(13);
+						return $this->respone(152);
 					}
 					//信箱是否符合規則
 			    	if(!preg_match("/^[\w]*@[\w-]+(\.[\w-]+)+$/", $this->system->mail)){
-			    		return $this->respone(14);
+			    		return $this->respone(153);
 					}
 					break;
 
 				case 'CMG':
 					//權限代碼是否輸入
 			    	if(!isset($this->system->groupID)){
-			    		return $this->respone(15);
+			    		return $this->respone(160);
 			    	}
 					break;
 
@@ -118,7 +118,7 @@ class api_judge_services{
 					//會員唯一碼是否輸入
 			    	if(isset($this->system->memberID)){
 			    		if(!is_numeric($this->system->memberID)){
-			    			return $this->respone(17);
+			    			return $this->respone(170);
 			    		}
 			    	}
 					break;
@@ -127,7 +127,7 @@ class api_judge_services{
 					//語言是否輸入
 			    	if(isset($this->system->languageID)){
 			    		if(!is_numeric($this->system->languageID)){
-			    			return $this->respone(17);
+			    			return $this->respone(180);
 			    		}
 			    	}
 					break;
@@ -136,7 +136,7 @@ class api_judge_services{
 					//裝置是否輸入
 					if(isset($this->system->equipmentID)){
 			    		if(!is_numeric($this->system->equipmentID)){
-			    			return $this->respone(19);
+			    			return $this->respone(190);
 			    		}
 			    	}
 					break;
@@ -144,29 +144,32 @@ class api_judge_services{
 				case 'CMI':
 					//IP是否輸入
 					if(!isset($this->system->ip)){
-			    			return $this->respone(20);
+			    			return $this->respone(200);
 			    	}
 					break;
 
 				case 'CMT':
 					//Token是否符合規則
 					if(!preg_match("/^[a-zA-Z0-9]{20}$/", $this->system->token)){
-			    		return $this->respone(22);
+			    		return $this->respone(210);
 					}
 					break;
 
 				case 'CMAD':
 					//地址是否過長
 			    	if(strlen($this->system->address) > 50){
-			    		return $this->respone(23);
+			    		return $this->respone(220);
 					}
 					break;
 
 				case 'CMB':
 					//生日是否為數字
 			    	if(isset($this->system->birthday)){
-			    		if(!is_numeric($this->system->birthday)){
-			    			return $this->respone(24);
+			    		if($this->system->birthday != '')
+			    		{
+			    			if(!preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $this->system->birthday)){
+			    				return $this->respone(230);
+			    			}
 			    		}
 			    	}
 					break;
@@ -175,7 +178,7 @@ class api_judge_services{
 					//性別是否為數字
 			    	if(isset($this->system->gender)){
 			    		if(!is_numeric($this->system->gender)){
-			    			return $this->respone(25);
+			    			return $this->respone(240);
 			    		}
 			    	}
 					break;
@@ -183,8 +186,11 @@ class api_judge_services{
 				case 'CMC':
 					//卡號是否為數字
 			    	if(isset($this->system->cardID)){
-			    		if(!is_numeric($this->system->cardID)){
-			    			return $this->respone(26);
+			    		if($this->system->cardID != '')
+			    		{
+			    			if(!is_numeric($this->system->cardID)){
+			    				return $this->respone(250);
+			    			}
 			    		}
 			    	}
 					break;
@@ -192,46 +198,46 @@ class api_judge_services{
 				case 'CPWON':
 			        //舊密碼是否輸入
 			        if(!isset($this->system->passwordo)){
-			            return $this->respone(27);
+			            return $this->respone(260);
 			        }
 			        //舊密碼是否過長
 			        if(strlen($this->system->passwordo) > 20){
-			            return $this->respone(28);
+			            return $this->respone(261);
 			        }
 			        //舊密碼是否過短
 			        if(strlen($this->system->passwordo) < 6){
-			            return $this->respone(29);
+			            return $this->respone(262);
 			        }
 			        //舊密碼是否符合規則
 			        if(!preg_match("/^([0-9A-Za-z]+)$/", $this->system->passwordo)){
-			            return $this->respone(30);
+			            return $this->respone(263);
 			        }
 			        //新密碼是否輸入
 			        if(!isset($this->system->passwordn)){
-			            return $this->respone(31);
+			            return $this->respone(264);
 			        }
 			        //新密碼是否過長
 			        if(strlen($this->system->passwordn) > 20){
-			            return $this->respone(32);
+			            return $this->respone(265);
 			        }
 			        //新密碼是否過短
 			        if(strlen($this->system->passwordn) < 6){
-			            return $this->respone(33);
+			            return $this->respone(266);
 			        }
 			        //新密碼是否符合規則
 			        if(!preg_match("/^([0-9A-Za-z]+)$/", $this->system->passwordn)){
-			            return $this->respone(34);
+			            return $this->respone(267);
 			        }
 					break;
 
 				case 'CAPI':
 					//確認回傳資料是不是空白
 					if($this->system->result == ''){
-						return $this->respone(100);
+						return $this->respone(270);
 					}
 					//確認回傳資料是不是 JSON
 					if(!isJson($this->system->result)){
-						return $this->respone(101);
+						return $this->respone(271);
 					}
 					//將資料轉換為 Object
 					$this->system->result = json_decode($this->system->result);
@@ -246,7 +252,7 @@ class api_judge_services{
 					//取得會員資料
 			    	$db = $member_repository->checkLoginBase($this->system->account);
 					if(empty($db)){
-						return $this->respone(500);
+						return $this->respone(300);
 					}
 					//將資料空白去除
 					foreach($db as $row){
@@ -258,7 +264,7 @@ class api_judge_services{
 					//取得會員詳細資料
 			    	$db = $member_repository->getMemberDetail($this->system->memberID);	    	
 					if(empty($db)){
-						return $this->respone(501);
+						return $this->respone(310);
 					}
 					//將資料空白去除
 					foreach($db as $row){
@@ -272,7 +278,7 @@ class api_judge_services{
 					if(!empty($db)){
 						$db = $db[0];
 						if($db->dataCount != 0){
-							return $this->respone(503);
+							return $this->respone(320);
 						}
 					}
 					break;
@@ -283,7 +289,7 @@ class api_judge_services{
 					if(!empty($db)){
 						$db = $db[0];
 						if($db->dataCount != 0){
-							return $this->respone(504);
+							return $this->respone(330);
 						}
 					}
 					break;
@@ -291,11 +297,11 @@ class api_judge_services{
 				case 'SCG':
 					//權限代碼是否輸入
 			    	if(!isset($this->system->groupID)){
-			    		return $this->respone(505);
+			    		return $this->respone(340);
 			    	}
 					$db = with(new group_repository())->checkGroupID($this->system->groupID);
 					if(empty($db)){
-						return $this->respone(506);
+						return $this->respone(341);
 					}
 					$result = false;
 					if(!empty($db)){
@@ -309,21 +315,21 @@ class api_judge_services{
 						$result = true;
 					}
 					if($result){
-						return $this->respone(507);
+						return $this->respone(342);
 					}
 					break;
 
 				case 'SMUG':
 					//上層帳號是否輸入
 			    	if(!isset($this->system->upmemberID)){
-			    		return $this->respone(508);
+			    		return $this->respone(350);
 			    	}
 					//取得會員編號
 					if($this->system->upmemberID != ''){
 						if ($this->system->upmemberID != 0){
 							$db = $member_repository->getMemberID($this->system->upmemberID);
 							if(empty($db)){
-								return $this->respone(509);
+								return $this->respone(351);
 							}
 
 							foreach($db as $row){

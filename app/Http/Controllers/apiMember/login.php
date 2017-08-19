@@ -43,17 +43,18 @@ class login extends Controller
         $this->system->action = '[check_password]';
         if($this->system->member->mpassword != strtoupper(md5($this->system->password))){
             with(new member_repository())->addPasswordErrorCount($this->system->member->mmemberID);
-            return $this->respone(1);
+            with(new api_respone_services())->reAPI(10, $this->system);
         }
+
         //比對密碼錯誤次數
         if($this->system->member->mpassworderrorcount > 6){
-            return $this->respone(2);
+            with(new api_respone_services())->reAPI(11, $this->system);
         }
 
         //比對帳號是否可用
         $this->system->action = '[check_useinfo]';
         if($this->system->member->museinfo != 1){
-            return $this->respone(3);
+            with(new api_respone_services())->reAPI(12, $this->system);
         }
 
         //清除密碼錯誤次數

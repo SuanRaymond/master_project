@@ -10,6 +10,6 @@ class shopMenu_repository{
      * @param  int $_groupID 權限代碼
      */
     public function getMenuList(){
-        return DB::connection('shopSQLsrv')->select("EXEC SSP_ShopMenuList", array());
+        return DB::connection('shopSQLsrv')->select("SET NOCOUNT ON; EXEC SSP_ShopMenuList", array());
     }
 }
