@@ -9,7 +9,7 @@ use App\Repository\shop_repository;
 
 use App\Services\api_judge_services;
 use App\Services\api_respone_services;
-class getMenuCommodity extends Controller
+class getShopltemDetail extends Controller
 {
 	//共用參數
     public $system;
@@ -17,13 +17,13 @@ class getMenuCommodity extends Controller
     /**
         登入
         1、從對應 API 接收POST資訊，需取得：
-            A：Params：加密後的資料JSON（{"MenuID":"MenuID"}）
+            A：Params：加密後的資料JSON（{"ShopID":"商品編號"}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、比對帳號是否合法
         4、取得DB 內帳號資料
         5、輸出完整資料
-        {"Result":"狀態","Menu":{"0":{"MenuID":"編號","Title":"標題","SubTitle":"副標","Price":售價,"Points":積分,"Transport":運費},.....}}
+        {"Result":狀態,"ShopltemDetail":{"商品編號":{"shopID":"商品編號","title":"標題","subtitle":"副標","quantity":"數量","style":"風格","price":"售價","points":"積分","transport":"運費","menuID":"商品類別ID","orderID":"排序","useinfo":"致能","detail":"商品說明","norm":"規格","memo":"備註","bDate":"上架時間"}}}
      */
 
     public function __construct()
@@ -35,24 +35,19 @@ class getMenuCommodity extends Controller
     {
         $this->system->action = '[judge]';
 
-        if($this->system->menuID == '')
-            $this->system->menuID = null;
-
-        $db = with(new shop_repository())->getMenuCommodity($this->system->menuID);
+        $db = with(new shop_repository())->getShopltemDetail($this->system->shopID);
 
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);
         }
 
-
-        $this->system->menuCommodity = (object) array();
+        $this->system->shopltemDetail = (object) array();
 
         foreach($db as $row){
-            $menuID = $row->sMenuID;
             $shopID = $row->sShopID;
 
-            if(empty($this->system->menuCommodity->$menuID)){
-                $this->system->menuCommodity->$menuID = (object) array();
+            if(empty($this->system->shopltemDetail->$shopID)){
+                $this->system->shopltemDetail->$shopID = (object) array();
             }
 
             $_row = clone $row;
@@ -63,9 +58,8 @@ class getMenuCommodity extends Controller
                 unset($row->$tempKey);
             }
 
-            unset($row->sMenuID);
-            unset($row->ShopID);
-            $this->system->menuCommodity->$menuID->$shopID = reSetKey($row);
+            unset($row->sShopID);
+            $this->system->shopltemDetail->$shopID = reSetKey($row);
         }
 
         with(new api_respone_services())->reAPI(0, $this->system);

@@ -39,8 +39,14 @@ class api_respone_services
 				case 'GetMenu':
 					$OutPut_Array['Menu'] = $_system->menu;
 					break;
+				case 'ShopltemAdd':
+					$OutPut_Array['ShopID'] = $_system->shopID;
+					break;
 				case 'GetMenuCommodity':
 					$OutPut_Array['MenuCommodity'] = $_system->menuCommodity;
+					break;
+				case 'GetShopltemDetail':
+					$OutPut_Array['ShopltemDetail'] = $_system->shopltemDetail;
 					break;
 			}
 		}
