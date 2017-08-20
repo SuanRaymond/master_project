@@ -37,23 +37,35 @@ class getMenuCommodity extends Controller
 
         if($this->system->menuID == '')
             $this->system->menuID = null;
-        
+
         $db = with(new shop_repository())->getMenuCommodity($this->system->menuID);
 
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);
         }
 
+
         $this->system->menuCommodity = (object) array();
 
-        foreach ($db as $index => $row) {
-            $this->system->menuCommodity->$index = (object) array();
-            $this->system->menuCommodity->$index->MenuID = $row->sMenuID;
-            $this->system->menuCommodity->$index->Title = $row->cTitle;
-            $this->system->menuCommodity->$index->SubTitle = $row->cSubTitle;
-            $this->system->menuCommodity->$index->Price = $row->cPrice;
-            $this->system->menuCommodity->$index->Points = $row->cPoints;
-            $this->system->menuCommodity->$index->Transport = $row->cTransport;
+        foreach($db as $row){
+            $menuID = $row->sMenuID;
+            $shopID = $row->sShopID;
+
+            if(empty($this->system->menuCommodity->$menuID)){
+                $this->system->menuCommodity->$menuID = (object) array();
+            }
+
+            $_row = clone $row;
+            foreach($_row as $key => $value){
+                $tempKey = $key;
+                $key = substr($key, 1);
+                $row->$key = $value;
+                unset($row->$tempKey);
+            }
+
+            unset($row->sMenuID);
+            unset($row->ShopID);
+            $this->system->menuCommodity->$menuID->$shopID = reSetKey($row);
         }
 
         with(new api_respone_services())->reAPI(0, $this->system);

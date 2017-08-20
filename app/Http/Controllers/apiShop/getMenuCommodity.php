@@ -53,6 +53,7 @@ class getMenuCommodity extends Controller
         $this->system->result    = with(new connection_services())->callApi($this->system);
         $this->system->getResult = $this->system->result;
 
+        //檢查廠商回傳資訊
         $this->system->action       = '[communication_judge]';
         $api_judge_services->system = $this->system;
         $this->system               = $api_judge_services->check(['CAPI']);
