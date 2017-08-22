@@ -120,10 +120,6 @@ class member_repository{
         return DB::select("EXEC SSP_MemberDetail @_memberID=?", array($_memberID));
     }
 
-    @_memberID INT, @_phone VARCHAR(20), @_address NVARCHAR(100),
-                                                     @_shopID INT, @_price DECIMAL(12, 4), @_points DECIMAL(12, 4), @_transport DECIMAL(12, 4), @_quantity INT,
-                                                     @_memo  NVARCHAR(255)
-
     /**
      * 新增會員訂單
      * @param  int      $_memberID       會員編號

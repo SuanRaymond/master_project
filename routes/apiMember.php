@@ -37,10 +37,10 @@ Route::post('/GetMenuCommodity', 'getMenuCommodity@index');
 Route::post('/GetShopltemDetail', 'getShopltemDetail@index');
 
 //新增會員訂單
-Route::post('/ＭemberCommodityOrderAdd', 'memberCommodityOrderAdd@index');
+Route::post('/CommodityOrderAdd', 'commodityOrderAdd@index');
 
 //修改會員訂單
-Route::post('/ＭemberCommodityOrderUpdate', 'memberCommodityOrderUpdate@index');
+Route::post('/CommodityOrderUpdate', 'commodityOrderUpdate@index');
 
 // //保持登入
 // Route::post('/SetLog', 'info\setLoginInfo@index');

@@ -48,6 +48,12 @@ class api_respone_services
 				case 'GetShopltemDetail':
 					$OutPut_Array['ShopltemDetail'] = $_system->shopltemDetail;
 					break;
+				case 'CommodityOrderAdd':
+					$OutPut_Array['ShoporderID'] = $_system->shoporderID;
+					break;
+				case 'CommodityOrderUpdate':
+					$OutPut_Array['Result'] = $_system->result;
+					break;
 			}
 		}
 		else{
