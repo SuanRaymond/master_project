@@ -36,6 +36,12 @@ Route::post('/GetMenuCommodity', 'getMenuCommodity@index');
 //取商品明細
 Route::post('/GetShopltemDetail', 'getShopltemDetail@index');
 
+//新增會員訂單
+Route::post('/ＭemberCommodityOrderAdd', 'memberCommodityOrderAdd@index');
+
+//修改會員訂單
+Route::post('/ＭemberCommodityOrderUpdate', 'memberCommodityOrderUpdate@index');
+
 // //保持登入
 // Route::post('/SetLog', 'info\setLoginInfo@index');
 

@@ -23,7 +23,7 @@ class shopltemAdd extends Controller
         3、比對帳號是否合法
         4、取得DB 內帳號資料
         5、輸出完整資料
-        {"Result":"狀態","Menu":{"0":{"MenuID":編號},......}}
+        {"Result":"狀態","ShopID":"商品編號"}
      */
 
     public function __construct()
