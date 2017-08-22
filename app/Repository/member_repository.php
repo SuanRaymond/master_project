@@ -13,10 +13,11 @@ class member_repository{
      * @param  string    $_mail         信箱
      * @param  string    $_upMemberID   上層會員
      * @param  string    $_groupID      權限代碼
+     * @param  string    $_verification 驗證碼
      */
-    public function addMember($_account, $_name, $_password, $_mail, $_upMemberID, $_groupID){
-        return DB::select("EXEC SSP_MemberAdd @_account=?, @_name=?, @_password=?, @_mail=?, @_upMemberID=?, @_groupID=?",
-                array($_account, $_name, $_password, $_mail, $_upMemberID, $_groupID));
+    public function addMember($_account, $_name, $_password, $_mail, $_upMemberID, $_groupID, $_verification){
+        return DB::select("EXEC SSP_MemberAdd @_account=?, @_name=?, @_password=?, @_mail=?, @_upMemberID=?, @_groupID=?, @_verification=?",
+                array($_account, $_name, $_password, $_mail, $_upMemberID, $_groupID, $_verification));
     }
 
     /**

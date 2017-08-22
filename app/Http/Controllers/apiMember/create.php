@@ -40,9 +40,11 @@ class create extends Controller
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
 
+        $this->system->verification = str_random(6);
+
         $db = with(new member_repository())
                 ->addMember($this->system->account, $this->system->name, $this->system->password,
-                            $this->system->mail, $this->system->upmemberID, $this->system->groupID);
+                            $this->system->mail, $this->system->upmemberID, $this->system->groupID, $this->system->verification);
 
         $this->system->action = '[reorderdata]';
         if(empty($db)){
