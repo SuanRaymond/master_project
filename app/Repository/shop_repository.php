@@ -71,9 +71,9 @@ class shop_repository{
      * @param  int      $_quantity       數量
      * @param  string   $_memo           備註
      */
-    public function addMemberCommodityOrder($_memberID, $_phone, $_address, $_shopID, $_price, $_points, $_transport, $_quantity, $_memo){
-        return DB::select("EXEC SSP_MemberCommodityOrderAdd @_memberID=?, @_phone=?, @_address=?, @_shopID=?, @_price=?, @_points=?, @_transport=?, @_quantity=?, @_memo=?",
-            array($_memberID, $_phone, $_address, $_shopID, $_price, $_points, $_transport, $_quantity, $_memo));
+    public function addMemberCommodityOrder($_memberID, $_shopID, $_quantity){
+        return DB::select("EXEC SSP_MemberCommodityOrderAdd @_memberID=?, @_shopID=?, @_quantity=?",
+            array($_memberID, $_shopID, $_quantity));
     }
 
     /**
