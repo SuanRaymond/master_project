@@ -46,7 +46,16 @@ class shop_repository{
      * @param  int      $_shopID      shopID
      */
     public function getShopltemDetail($_shopID){
-        return DB::select("EXEC SSP_ShopItemDetailShopID @_shopID=?", 
+        return DB::select("EXEC SSP_ShopltemDetailShopID @_shopID=?", 
+            array($_shopID));
+    }
+
+    /**
+     * 取購物車商品
+     * @param  int      $_shopID      shopID
+     */
+    public function getShopltemCar($_shopID){
+        return DB::select("EXEC SSP_ShopltemCarShopID @_shopID=?", 
             array($_shopID));
     }
 }

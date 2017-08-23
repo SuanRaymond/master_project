@@ -54,6 +54,9 @@ class api_respone_services
 				case 'CommodityOrderUpdate':
 					$OutPut_Array['Result'] = $_system->result;
 					break;
+				case 'GetShopltemCar':
+					$OutPut_Array['GetShopltemCar'] = $_system->shopltemCar;
+					break;
 			}
 		}
 		else{

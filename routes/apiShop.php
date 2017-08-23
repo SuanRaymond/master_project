@@ -23,3 +23,6 @@ Route::post('/CommodityOrderAdd', 'commodityOrderAdd@index');
 
 //修改會員訂單
 Route::post('/CommodityOrderUpdate', 'commodityOrderUpdate@index');
+
+//取購物車商品
+Route::post('/GetShopltemCar', 'getShopltemCar@index');

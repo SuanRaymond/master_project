@@ -165,11 +165,21 @@ if(!function_exists('reSetKey')){
                 $reKey = str_replace(strtolower($reCoverKey), $reCoverKey, $reKey);
             }
 
-            if(gettype($_object) === 'object'){
-                $reObject->$reKey = trim($value);
+            if(!(gettype($value) === 'object' || gettype($value) === 'array')){
+                if(gettype($_object) === 'object'){
+                    $reObject->$reKey = trim($value);
+                }
+                else if(gettype($_object) === 'array'){
+                    $reObject[$reKey] = trim($value);
+                }
             }
-            else if(gettype($_object) === 'array'){
-                $reObject[$reKey] = trim($value);
+            else{
+                if(gettype($_object) === 'object'){
+                    $reObject->$reKey = $value;
+                }
+                else if(gettype($_object) === 'array'){
+                    $reObject[$reKey] = $value;
+                }
             }
         }
         return $reObject;
