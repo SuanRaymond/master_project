@@ -34,7 +34,7 @@ class detail extends Controller
     public function index()
     {
     	$this->system->action = '[judge]';
-        $this->system = with(new api_judge_services($this->system))->check(['CMID']);
+        $this->system = with(new api_judge_services($this->system))->check(['CMID', 'SMGD']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
