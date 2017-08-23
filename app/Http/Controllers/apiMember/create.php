@@ -59,8 +59,7 @@ class create extends Controller
         }
 
         //發送驗證碼
-        $msg = '感谢您在 FunMugle 注册会员，您的验证码为『'. $this->system->verification. '』请立即输入验证，谢谢。
-                Thank you for registering at FunMugle, your verification code is 『'. $this->system->verification. '』 Please enter verification now, thanks.';
+        $msg = '感谢您在 FunMugle 注册会员，您的验证码为『'. $this->system->verification. '』请立即输入验证，谢谢。';
         $this->system->postArray   = http_build_query(
             array(
                 'username'  => env('SEND_MAIL_ACCOUNT'),
