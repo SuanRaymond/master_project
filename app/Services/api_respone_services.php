@@ -30,6 +30,7 @@ class api_respone_services
 					break;
 				case 'DetailUpdate':
 				case 'PasswordUpdate':
+				case 'VerificationCheck':
 					$OutPut_Array['Result'] = $_system->result;
 					break;
 				case 'SetLoginInfo':

@@ -120,4 +120,20 @@ class member_repository{
     public function getMemberDetail($_memberID){
         return DB::select("EXEC SSP_MemberDetail @_memberID=?", array($_memberID));
     }
+
+        /**
+     * 驗證驗證碼
+     * @param  int $_memberID 會員編號
+     */
+    public function CheckVerification($_memberID){
+        return DB::select("EXEC SSP_MemberVerificationCheck @_memberID=?", array($_memberID));
+    }
+
+            /**
+     * 清除驗證碼
+     * @param  int $_memberID 會員編號
+     */
+    public function ClearVerification($_memberID){
+        return DB::select("EXEC SSP_MemberVerificationClear @_memberID=?", array($_memberID));
+    }
 }

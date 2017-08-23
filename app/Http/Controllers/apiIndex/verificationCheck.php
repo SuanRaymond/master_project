@@ -8,7 +8,7 @@ use App\Http\Controllers\entrance;
 use App\Services\connection_services;
 use App\Services\api_judge_services;
 use App\Services\api_respone_services;
-class detailUpdate extends Controller
+class verificationCheck extends Controller
 {
 	//共用參數
     public $system;
@@ -16,9 +16,7 @@ class detailUpdate extends Controller
      /**
         寫入會員登入資料
         1、從前端接收POST資訊，需取得：
-            A：Params：加密後的資料JSON
-            （{"MemberID":"會員唯一碼","Name":"暱稱","Mail":"信箱","Address":"地址","Birthday":"生日","Gender":"性別",
-                "LanguageID":"語言","CardID":"卡號"}）
+            A：Params：加密後的資料JSON（{"MemberID":"會員唯一碼","Verification":"驗證碼"}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、密碼加密
@@ -36,7 +34,7 @@ class detailUpdate extends Controller
     {
     	$this->system->action = '[judge]';
         $api_judge_services = new api_judge_services($this->system);
-        $this->system = $api_judge_services->check(['CMID', 'CMN', 'CMM', 'CMAD', 'CMB', 'CMGD', 'CML', 'CMC']);
+        $this->system = $api_judge_services->check(['CMID', 'CMV']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
@@ -45,7 +43,7 @@ class detailUpdate extends Controller
         //放入連線區塊
         $this->system->action = '[communication]';
         //需呼叫的功能
-        $this->system->callFunction = 'DetailUpdate';
+        $this->system->callFunction = 'VerificationCheck';
         $this->system->sendApiUrl   = config('app.urlMemberApi');
         $this->system->sendApiUrl   = json_decode($this->system->sendApiUrl, true);
 
@@ -53,13 +51,8 @@ class detailUpdate extends Controller
         $this->system->action                       = '[communication_setdata]';
         $this->system->sendParams                   = [];
         $this->system->sendParams['MemberID']       = $this->system->memberID;
-        $this->system->sendParams['Name']           = $this->system->name;
-        $this->system->sendParams['Mail']           = $this->system->mail;
-        $this->system->sendParams['Address']        = $this->system->address;
-        $this->system->sendParams['Birthday']       = $this->system->birthday;
-        $this->system->sendParams['Gender']         = $this->system->gender;
-        $this->system->sendParams['LanguageID']     = $this->system->languageID;
-        $this->system->sendParams['CardID']         = $this->system->cardID;
+        $this->system->sendParams['Verification']      = $this->system->verification;
+
 
         //送出資料
         $this->system->action    = '[communication_send_post]';

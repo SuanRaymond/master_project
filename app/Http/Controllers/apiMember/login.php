@@ -61,6 +61,13 @@ class login extends Controller
         $this->system->action = '[clear_errorcount]';
         with(new member_repository())->clearPasswordErrorCount($this->system->member->mmemberID);
 
+        //驗證身份
+        $this->system->action = '[check_verification]';
+        if($this->system->member->mverification != ""){
+            with(new api_respone_services())->reAPI(13, $this->system);
+        }
+
+
 		//整理輸出資料
         $this->system->action = '[clear_machdata]';
 		unset($this->system->member->mpassword);

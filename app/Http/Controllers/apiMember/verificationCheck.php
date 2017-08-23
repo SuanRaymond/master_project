@@ -10,7 +10,7 @@ use App\Repository\member_repository;
 use App\Services\api_judge_services;
 use App\Services\api_respone_services;
 
-class detailUpdate extends Controller
+class verificationCheck extends Controller
 {
 	//共用參數
     public $system;
@@ -19,8 +19,7 @@ class detailUpdate extends Controller
         修改會員資料
         1、從前端接收POST資訊，需取得：
             A：Params：加密後的資料JSON
-            （{"MemberID":"會員唯一碼","Name":"暱稱","Mail":"信箱","Address":"地址","Birthday":"生日","Gender":"性別",
-                "LanguageID":"語言","CardID":"卡號"}）
+            （{"MemberID":"會員唯一碼","Verification":"驗證碼"}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、密碼加密
@@ -37,30 +36,31 @@ class detailUpdate extends Controller
     public function index()
     {
     	$this->system->action = '[judge]';
-        $this->system = with(new api_judge_services($this->system))->check(['CMID','CMN', 'CMM', 'CMAD', 'CMB', 'CMGD', 'CML', 'CMC']);
+        $this->system = with(new api_judge_services($this->system))->check(['CMID', 'CMV']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
 
-        $db = with(new member_repository())
-                ->updateMemberDetail($this->system->memberID, $this->system->name, $this->system->mail,
-                                    $this->system->address, $this->system->birthday,$this->system->gender, 
-                                    $this->system->languageID, $this->system->cardID);
+        $db = with(new member_repository())->CheckVerification($this->system->memberID);
 
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);
         }
-
         //將欄位名稱改變
         $this->system->action = '[reorderdata]';
         foreach($db as $row){
-            $this->system->result = $row->result;
+            $this->system->mVerification = $row->mVerification;
         }
 
-        if($this->system->result != 0){
-            with(new api_respone_services())->reAPI(501, $this->system);
+        //驗證碼不符
+        if($this->system->mVerification != $this->system->verification){
+            with(new api_respone_services())->reAPI(510, $this->system);
         }
 
+        //清除驗證碼
+        with(new member_repository())->ClearVerification($this->system->memberID);
+
+        $this->system->result = 0;
     	with(new api_respone_services())->reAPI(0, $this->system);
     }
 }

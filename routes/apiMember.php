@@ -42,6 +42,9 @@ Route::post('/CommodityOrderAdd', 'commodityOrderAdd@index');
 //修改會員訂單
 Route::post('/CommodityOrderUpdate', 'commodityOrderUpdate@index');
 
+//驗證驗證碼
+Route::post('/VerificationCheck', 'verificationCheck@index');
+
 // //保持登入
 // Route::post('/SetLog', 'info\setLoginInfo@index');
 

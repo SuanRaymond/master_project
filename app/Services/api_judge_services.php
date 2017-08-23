@@ -155,6 +155,13 @@ class api_judge_services{
 					}
 					break;
 
+				case 'CMV':
+					//驗證碼是否符合規則
+					if(!preg_match("/^[a-zA-Z0-9]{6}$/", $this->system->verification)){
+			    		return $this->respone(211);
+					}
+					break;
+
 				case 'CMAD':
 					//地址是否過長
 			    	if(strlen($this->system->address) > 50){

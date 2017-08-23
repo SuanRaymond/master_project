@@ -23,3 +23,6 @@ Route::post('/PasswordUpdate', 'passwordUpdate@index');
 
 //設定登入資訊
 Route::post('/SetLoginInfo', 'info\setLoginInfo@index');
+
+//驗證驗證碼
+Route::post('/VerificationCheck', 'verificationCheck@index');
