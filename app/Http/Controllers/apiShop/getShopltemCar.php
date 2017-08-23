@@ -55,8 +55,8 @@ class getShopltemCar extends Controller
                     $row->$key = $value;
                     unset($row->$tempKey);
                 }
-            $this->system->shopltemCar->$shopID = reSetKey($row);
-            unset($row->ShopID);
+                $this->system->shopltemCar->$shopID = reSetKey($row);
+                unset($row->ShopID);
             }
         }
 
