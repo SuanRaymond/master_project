@@ -26,3 +26,6 @@ Route::post('/CommodityOrderUpdate', 'commodityOrderUpdate@index');
 
 //取購物車商品
 Route::post('/GetShopltemCar', 'getShopltemCar@index');
+
+//簡易會員資料
+Route::post('/DetailSimple', 'detailSimple@index');

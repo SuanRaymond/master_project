@@ -18,6 +18,9 @@ Route::post('/Detail', 'detail@index');
 //修改會員資料
 Route::post('/DetailUpdate', 'detailUpdate@index');
 
+//簡易會員資料
+Route::post('/DetailSimple', 'detailSimple@index');
+
 //修改會員密碼
 Route::post('/PasswordUpdate', 'passwordUpdate@index');
 

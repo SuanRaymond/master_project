@@ -270,9 +270,21 @@ class api_judge_services{
 
 				case 'SMGD':
 					//取得會員詳細資料
-			    	$db = $member_repository->getMemberDetail($this->system->memberID);	    	
+			    	$db = $member_repository->getMemberDetail($this->system->memberID);
 					if(empty($db)){
 						return $this->respone(310);
+					}
+					//將資料空白去除
+					foreach($db as $row){
+						$this->system->member = reSetKey($row);
+					}
+					break;
+
+				case 'SMGDS':
+					//取得會員簡易資料
+			    	$db = $member_repository->getMemberDetailSimple($this->system->memberID);
+					if(empty($db)){
+						return $this->respone(311);
 					}
 					//將資料空白去除
 					foreach($db as $row){

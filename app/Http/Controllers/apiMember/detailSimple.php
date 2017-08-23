@@ -9,7 +9,7 @@ use App\Repository\member_repository;
 
 use App\Services\api_judge_services;
 use App\Services\api_respone_services;
-class detail extends Controller
+class detailSimple extends Controller
 {
 	//共用參數
     public $system;
@@ -23,7 +23,7 @@ class detail extends Controller
         3、比對帳號是否合法
         4、取得DB 內帳號資料
         5、輸出完整資料
-        {"Result":"狀態","Member":{"account":"帳號","name":"暱稱","points":"點數","integral":"積分","bonus":"紅利","memberID":"會員編號","mail":"信箱","address":"地址","birthday":"生日","gender":"性別","cardID":"銀行卡","LanguageID":"語言"}
+        {"Result":"狀態","Member":{"account":"帳號","name":"暱稱","address":"地址"}
      */
 
     public function __construct()
@@ -34,7 +34,7 @@ class detail extends Controller
     public function index()
     {
     	$this->system->action = '[judge]';
-        $this->system = with(new api_judge_services($this->system))->check(['CMID']);
+        $this->system = with(new api_judge_services($this->system))->check(['CMID', 'SMGDS']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }

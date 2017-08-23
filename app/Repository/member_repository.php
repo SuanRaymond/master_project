@@ -114,11 +114,19 @@ class member_repository{
 
 
     /**
-     * 驗證會員登入
+     * 查詢會員詳細資料
      * @param  int $_memberID 會員編號
      */
     public function getMemberDetail($_memberID){
         return DB::select("EXEC SSP_MemberDetail @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 查詢會員簡易資料
+     * @param  int $_memberID 會員編號
+     */
+    public function getMemberDetailSimple($_memberID){
+        return DB::select("EXEC SSP_MemberDetailSimple @_memberID=?", array($_memberID));
     }
 
         /**

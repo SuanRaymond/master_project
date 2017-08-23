@@ -23,6 +23,7 @@ class api_respone_services
 					break;
 				case 'Login':
 				case 'Detail':
+				case 'DetailSimple':
 					$OutPut_Array['Member'] = $_system->member;
 					break;
 				case 'Create':
