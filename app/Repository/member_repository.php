@@ -133,15 +133,41 @@ class member_repository{
      * 驗證驗證碼
      * @param  int $_memberID 會員編號
      */
-    public function CheckVerification($_memberID){
+    public function checkVerification($_memberID){
         return DB::select("EXEC SSP_MemberVerificationCheck @_memberID=?", array($_memberID));
     }
 
-            /**
+    /**
+     * 更新驗證碼
+     * @param  int      $_memberID      會員編號
+     * @param  string   $_verification  驗證碼
+     */
+    public function updateVerification($_memberID, $_verification){
+        return DB::select("EXEC SSP_MemberVerificationUpdate @_memberID=?, @_verification=?", array($_memberID, $_verification));
+    }
+
+    /**
      * 清除驗證碼
      * @param  int $_memberID 會員編號
      */
-    public function ClearVerification($_memberID){
+    public function clearVerification($_memberID){
         return DB::select("EXEC SSP_MemberVerificationClear @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 驗證驗時效日期
+     * @param  int $_memberID 會員編號
+     */
+    public function getVerificationDate($_memberID){
+        return DB::select("EXEC SSP_MemberVerificationDate @_memberID=?", array($_memberID));
+    }
+
+   /**
+     * 更新驗證驗時效日期
+     * @param  int      $_memberID      會員編號
+     * @param  string   $_verification  驗證碼
+     */
+    public function updateVerificationDate($_memberID, $_verification){
+        return DB::select("EXEC SSP_MemberVerificationDateUpdate @_memberID=?, @_verification=?", array($_memberID,  $_verification));
     }
 }

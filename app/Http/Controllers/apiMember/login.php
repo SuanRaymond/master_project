@@ -64,6 +64,9 @@ class login extends Controller
         //驗證身份
         $this->system->action = '[check_verification]';
         if($this->system->member->mverification != ""){
+            $memberID = $this->system->member->mmemberID;
+            $this->system->member = (object) array();
+            $this->system->member->memberID = $memberID;
             with(new api_respone_services())->reAPI(13, $this->system);
         }
 

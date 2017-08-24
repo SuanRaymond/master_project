@@ -32,6 +32,7 @@ class api_respone_services
 				case 'DetailUpdate':
 				case 'PasswordUpdate':
 				case 'VerificationCheck':
+				case 'VerificationReSend':
 					$OutPut_Array['Result'] = $_system->result;
 					break;
 				case 'SetLoginInfo':
@@ -59,9 +60,17 @@ class api_respone_services
 				case 'GetShopltemCar':
 					$OutPut_Array['GetShopltemCar'] = $_system->shopltemCar;
 					break;
+				case 'VerificationDate':
+				case 'VerificationDateUpdate':
+					$OutPut_Array['VerificationDate'] = $_system->verificationDate;
+					break;
 			}
 		}
 		else{
+			//驗證碼頁面
+			if($_result == 13){
+				$OutPut_Array['Member'] = $_system->member;
+			}
 		}
 
 		/*****************************************************************/

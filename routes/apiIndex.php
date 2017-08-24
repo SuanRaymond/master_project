@@ -26,3 +26,12 @@ Route::post('/SetLoginInfo', 'info\setLoginInfo@index');
 
 //驗證驗證碼
 Route::post('/VerificationCheck', 'verificationCheck@index');
+
+//驗證驗時效日期
+Route::post('/VerificationDate', 'verificationDate@index');
+
+//更新驗證驗時效日期
+Route::post('/VerificationDateUpdate', 'verificationDateUpdate@index');
+
+//重發驗證碼
+Route::post('/VerificationReSend', 'verificationReSend@index');
