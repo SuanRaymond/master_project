@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Repository\group_repository;
 use App\Repository\member_repository;
+use App\Repository\admin_repository;
 
 class api_judge_services{
 
@@ -26,6 +27,7 @@ class api_judge_services{
 	{
 		$this->system->status = 0;
 		$member_repository    = new member_repository();
+		$admin_repository     = new admin_repository();
 		foreach($_switch as $key){
 			switch($key){
 				/************** 確認資訊 **************/
@@ -265,7 +267,22 @@ class api_judge_services{
 					//將資料空白去除
 					foreach($db as $row){
 						$this->system->member = reSetKey($row);
-					}	
+					}
+					break;
+				case 'SAG':
+					//取得會員資料
+			    	$db = $admin_repository->checkLoginBase($this->system->account);
+					if(empty($db)){
+						return $this->respone(301);
+					}
+					//將資料空白去除
+					foreach($db as $row){
+						$this->system->member = reSetKey($row);
+					}
+					//判斷是不是管理員
+					if($this->system->member->sgroupID > 200){
+						return $this->respone(302);
+					}
 					break;
 
 				case 'SMGD':

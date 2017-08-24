@@ -14,12 +14,14 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $apiMemberNameSpace = 'App\Http\Controllers\apiMember';
-    protected $apiIndexNameSpace  = 'App\Http\Controllers\apiIndex';
-    protected $apiShopNameSpace   = 'App\Http\Controllers\apiShop';
-    protected $apiMemberDomain    = 'localhost';
-    protected $apiIndexDomain     = 'localhost';
-    protected $apiShopDomain      = 'localhost';
+    protected $apiMemberNameSpace  = 'App\Http\Controllers\apiMember';
+    protected $apiIndexNameSpace   = 'App\Http\Controllers\apiIndex';
+    protected $apiShopNameSpace    = 'App\Http\Controllers\apiShop';
+    protected $apiManagerNameSpace = 'App\Http\Controllers\apiManager';
+    protected $apiManagerDomain    = 'localhost';
+    protected $apiMemberDomain     = 'localhost';
+    protected $apiIndexDomain      = 'localhost';
+    protected $apiShopDomain       = 'localhost';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -41,18 +43,21 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         // 將Domin JSON 轉換為物件
-        $this->apiMemberDomain = config('app.urlMemberApi');
-        $this->apiMemberDomain = json_decode($this->apiMemberDomain, true);
-        $this->apiIndexDomain  = config('app.urlIndexApi');
-        $this->apiIndexDomain  = json_decode($this->apiIndexDomain, true);
-        $this->apiShopDomain   = config('app.urlShopApi');
-        $this->apiShopDomain   = json_decode($this->apiShopDomain, true);
+        $this->apiMemberDomain  = config('app.urlMemberApi');
+        $this->apiMemberDomain  = json_decode($this->apiMemberDomain, true);
+        $this->apiIndexDomain   = config('app.urlIndexApi');
+        $this->apiIndexDomain   = json_decode($this->apiIndexDomain, true);
+        $this->apiShopDomain    = config('app.urlShopApi');
+        $this->apiShopDomain    = json_decode($this->apiShopDomain, true);
+        $this->apiManagerDomain = config('app.urlManagerApi');
+        $this->apiManagerDomain = json_decode($this->apiManagerDomain, true);
 
         //是否偽造 Domain
         if(empty($_SERVER['HTTP_HOST'])){
-            $this->apiMemberDomain = 'localhost';
-            $this->apiIndexDomain  = 'localhost';
-            $this->apiShopDomain   = 'localhost';
+            $this->apiMemberDomain  = 'localhost';
+            $this->apiIndexDomain   = 'localhost';
+            $this->apiShopDomain    = 'localhost';
+            $this->apiManagerDomain = 'localhost';
         }
         //ENV 是否設定 Domain 完成
         else if(is_null($this->apiMemberDomain)){
@@ -63,6 +68,9 @@ class RouteServiceProvider extends ServiceProvider
         }
         else if(is_null($this->apiShopDomain)){
             $this->apiShopDomain = 'localhost';
+        }
+        else if(is_null($this->apiManagerDomain)){
+            $this->apiManagerDomain = 'localhost';
         }
         else{
             //取得目前請求者的Domain
@@ -76,6 +84,9 @@ class RouteServiceProvider extends ServiceProvider
             }
             else if(in_array($host, $this->apiShopDomain)){
                 $this->mapApiShopRoutes();
+            }
+            else if(in_array($host, $this->apiManagerDomain)){
+                $this->mapApiManagerRoutes();
             }
             else{
                 abort(404);
@@ -112,5 +123,15 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('api')
              ->namespace($this->apiShopNameSpace)
              ->group(base_path('routes/apiShop.php'));
+    }
+
+    /**
+     * Manager 使用的 Route Group
+     */
+    protected function mapApiManagerRoutes()
+    {
+        Route::middleware('api')
+             ->namespace($this->apiManagerNameSpace)
+             ->group(base_path('routes/apiManager.php'));
     }
 }

@@ -51,10 +51,11 @@ return [
     |
     */
 
-    'url'          => env('APP_URL', 'http://localhost'),
-    'urlMemberApi' => env('API_MEMBER_DOMAIN'),
-    'urlIndexApi'  => env('API_INDEX_DOMAIN'),
-    'urlShopApi'   => env('API_SHOP_DOMAIN'),
+    'url'           => env('APP_URL', 'http://localhost'),
+    'urlMemberApi'  => env('API_MEMBER_DOMAIN'),
+    'urlIndexApi'   => env('API_INDEX_DOMAIN'),
+    'urlShopApi'    => env('API_SHOP_DOMAIN'),
+    'urlManagerApi' => env('API_MANAGER_DOMAIN'),
 
     /*
     |--------------------------------------------------------------------------
