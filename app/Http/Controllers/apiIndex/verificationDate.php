@@ -34,7 +34,7 @@ class verificationDate extends Controller
     {
     	$this->system->action = '[judge]';
         $api_judge_services = new api_judge_services($this->system);
-        $this->system = $api_judge_services->check(['CMID', 'CMV']);
+        $this->system = $api_judge_services->check(['CMID']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
@@ -43,7 +43,7 @@ class verificationDate extends Controller
         //放入連線區塊
         $this->system->action = '[communication]';
         //需呼叫的功能
-        $this->system->callFunction = 'VerificationCheck';
+        $this->system->callFunction = 'VerificationDate';
         $this->system->sendApiUrl   = config('app.urlMemberApi');
         $this->system->sendApiUrl   = json_decode($this->system->sendApiUrl, true);
 
@@ -51,8 +51,6 @@ class verificationDate extends Controller
         $this->system->action                       = '[communication_setdata]';
         $this->system->sendParams                   = [];
         $this->system->sendParams['MemberID']       = $this->system->memberID;
-        $this->system->sendParams['Verification']      = $this->system->verification;
-
 
         //送出資料
         $this->system->action    = '[communication_send_post]';
@@ -70,7 +68,7 @@ class verificationDate extends Controller
         /*----------------------------------與廠商溝通----------------------------------*/
         //整理輸出資料
         $this->system->action = '[reorderdata]';
-        $this->system->result = $this->system->result->Result;
+        $this->system->verificationDate = $this->system->result->VerificationDate;
 
     	with(new api_respone_services())->reAPI(0, $this->system);
     }
