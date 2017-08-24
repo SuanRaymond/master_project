@@ -54,7 +54,7 @@ class verificationReSend extends Controller
         }
 
         //未到驗證碼開通時間
-        if(strtotime(date("Y-m-d H:i:s")) - strtotime($this->system->verificationDate) < 0){
+        if(strtotime(date("Y-m-d H:i:s")) - strtotime($this->system->verificationDate) > 0){
             with(new api_respone_services())->reAPI(520, $this->system);
         }
 
