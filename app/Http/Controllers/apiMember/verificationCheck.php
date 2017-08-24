@@ -53,7 +53,7 @@ class verificationCheck extends Controller
         }
 
         //驗證碼不符
-        if($this->system->mVerification != $this->system->verification){
+        if(strtoupper($this->system->mVerification) != strtoupper($this->system->verification)){
             with(new api_respone_services())->reAPI(510, $this->system);
         }
 
