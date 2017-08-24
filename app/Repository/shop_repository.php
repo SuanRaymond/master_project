@@ -5,6 +5,15 @@ use DB;
 //member SQL 輔助
 class shop_repository{
 
+    public $contStr = '';
+
+    public function __construct()
+    {
+        if(strlen(env('DB_HOST')) > 10){
+            $this->contStr = 'SET NOCOUNT ON; ';
+        }
+    }
+
     /**
      * 新增會員
      * @param  string    $_title      標題
@@ -20,7 +29,7 @@ class shop_repository{
      * @param  string    $_memo       備註
      */
     public function addShopltem($_title, $_subTitle, $_menuID, $_price, $_points, $_transport, $_quantity, $_style, $_detail, $_norm, $_memo){
-        return DB::select("EXEC SSP_ShopAdd @_title=?, @_subTitle=?, @_menuID=?, @_price=?, @_points=?, @_transport=?, @_quantity=?, @_style=?, @_detail=?, @_norm=?, @_memo=?",
+        return DB::select($this->contStr. "EXEC SSP_ShopAdd @_title=?, @_subTitle=?, @_menuID=?, @_price=?, @_points=?, @_transport=?, @_quantity=?, @_style=?, @_detail=?, @_norm=?, @_memo=?",
                 array($_title, $_subTitle, $_menuID, $_price, $_points, $_transport, $_quantity, $_style, $_detail, $_norm, $_memo));
     }
 
@@ -28,7 +37,7 @@ class shop_repository{
      * 取MenuID
      */
     public function getMenu(){
-        return DB::select("EXEC SSP_ShopMenu", 
+        return DB::select($this->contStr. "EXEC SSP_ShopMenu", 
             array());
     }
 
@@ -37,7 +46,7 @@ class shop_repository{
      * @param  int      $_menuID      menuID
      */
     public function getMenuCommodity($_menuID){
-        return DB::select("EXEC SSP_ShopMenuCommodity @_menuID=?", 
+        return DB::select($this->contStr. "EXEC SSP_ShopMenuCommodity @_menuID=?", 
             array($_menuID));
     }
 
@@ -46,7 +55,7 @@ class shop_repository{
      * @param  int      $_shopID      shopID
      */
     public function getShopltemDetail($_shopID){
-        return DB::select("EXEC SSP_ShopltemDetailShopID @_shopID=?", 
+        return DB::select($this->contStr. "EXEC SSP_ShopltemDetailShopID @_shopID=?", 
             array($_shopID));
     }
 
@@ -55,7 +64,7 @@ class shop_repository{
      * @param  int      $_shopID      shopID
      */
     public function getShopltemCar($_shopID){
-        return DB::select("EXEC SSP_ShopltemCarShopID @_shopID=?", 
+        return DB::select($this->contStr. "EXEC SSP_ShopltemCarShopID @_shopID=?", 
             array($_shopID));
     }
 
@@ -72,7 +81,7 @@ class shop_repository{
      * @param  string   $_memo           備註
      */
     public function addMemberCommodityOrder($_memberID, $_shopID, $_quantity){
-        return DB::select("EXEC SSP_MemberCommodityOrderAdd @_memberID=?, @_shopID=?, @_quantity=?",
+        return DB::select($this->contStr. "EXEC SSP_MemberCommodityOrderAdd @_memberID=?, @_shopID=?, @_quantity=?",
             array($_memberID, $_shopID, $_quantity));
     }
 
@@ -83,7 +92,7 @@ class shop_repository{
      * @param  int      $_status          狀態
      */
     public function updateMemberCommodityOrder($_memberID, $_shoporderID, $_status){
-        return DB::select("EXEC SSP_MemberCommodityOrderUpdate @_memberID=?, @_shoporderID=?, @_status=?",
+        return DB::select($this->contStr. "EXEC SSP_MemberCommodityOrderUpdate @_memberID=?, @_shoporderID=?, @_status=?",
             array($_memberID, $_shoporderID, $_status));
     }
 }

@@ -5,6 +5,15 @@ use DB;
 //member SQL 輔助
 class member_repository{
 
+    public $contStr = '';
+
+    public function __construct()
+    {
+        if(strlen(env('DB_HOST')) > 10){
+            $this->contStr = 'SET NOCOUNT ON; ';
+        }
+    }
+
     /**
      * 新增會員
      * @param  string    $_account      帳號
@@ -16,7 +25,7 @@ class member_repository{
      * @param  string    $_verification 驗證碼
      */
     public function addMember($_account, $_name, $_password, $_mail, $_upMemberID, $_groupID, $_verification){
-        return DB::select("EXEC SSP_MemberAdd @_account=?, @_name=?, @_password=?, @_mail=?, @_upMemberID=?, @_groupID=?, @_verification=?",
+        return DB::select($this->contStr. $this->contStr. "EXEC SSP_MemberAdd @_account=?, @_name=?, @_password=?, @_mail=?, @_upMemberID=?, @_groupID=?, @_verification=?",
                 array($_account, $_name, $_password, $_mail, $_upMemberID, $_groupID, $_verification));
     }
 
@@ -25,7 +34,7 @@ class member_repository{
      * @param  string $_account 會員帳號
      */
     public function getMemberID($_account){
-        return DB::select("EXEC SSP_MemberMemberID @_account=?", array($_account));
+        return DB::select($this->contStr. "EXEC SSP_MemberMemberID @_account=?", array($_account));
     }
 
     /**
@@ -33,7 +42,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function checkMemberID($_memberID){
-        return DB::select("EXEC SSP_MemberMemberIDCheck @_memberID=?", array($_memberID));
+        return DB::select($this->contStr. "EXEC SSP_MemberMemberIDCheck @_memberID=?", array($_memberID));
     }
 
     /**
@@ -41,7 +50,7 @@ class member_repository{
      * @param  string $_account 會員帳號
      */
     public function checkAccountRepeat($_account){
-        return DB::select("EXEC SSP_MemberCheckAccountRepeat @_account=?", array($_account));
+        return DB::select($this->contStr. "EXEC SSP_MemberCheckAccountRepeat @_account=?", array($_account));
     }
 
     /**
@@ -49,7 +58,7 @@ class member_repository{
      * @param  string $_mail 信箱
      */
     public function checkMailRepeat($_mail){
-        return DB::select("EXEC SSP_MemberCheckMailRepeat @_mail=?", array($_mail));
+        return DB::select($this->contStr. "EXEC SSP_MemberCheckMailRepeat @_mail=?", array($_mail));
     }
 
     /**
@@ -57,7 +66,7 @@ class member_repository{
      * @param  string $_account 會員帳號
      */
     public function checkLoginBase($_account){
-        return DB::select("EXEC SSP_MemberCheckLogin @_account=?", array($_account));
+        return DB::select($this->contStr. "EXEC SSP_MemberCheckLogin @_account=?", array($_account));
     }
 
     /**
@@ -65,7 +74,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function setLoginInfo($_memberID, $_languageID, $_equipmentID, $_token, $_iP){
-        return DB::select("EXEC SSP_MemberLoginInfoSet @_memberID=?, @_languageID=?, @_equipmentID=?, @_token=?, @_ip=?",
+        return DB::select($this->contStr. "EXEC SSP_MemberLoginInfoSet @_memberID=?, @_languageID=?, @_equipmentID=?, @_token=?, @_ip=?",
                     array($_memberID, $_languageID, $_equipmentID, $_token, $_iP));
     }
 
@@ -81,7 +90,7 @@ class member_repository{
      * @param  string   $_cardID        卡號
      */
     public function updateMemberDetail($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_cardID){
-        return DB::select("EXEC SSP_MemberDetailUpdate @_memberID=?, @_name=?, @_mail=?, @_address=?, @_birthday=?, @_gender=?, @_languageID=?, @_cardID=?", 
+        return DB::select($this->contStr. "EXEC SSP_MemberDetailUpdate @_memberID=?, @_name=?, @_mail=?, @_address=?, @_birthday=?, @_gender=?, @_languageID=?, @_cardID=?", 
             array($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_cardID));
     }
 
@@ -92,7 +101,7 @@ class member_repository{
      * @param  string       $_passwordN 新密碼
      */
     public function updatePassword($_memberID, $_passwordO, $_passwordN){
-        return DB::select("EXEC SSP_MemberPasswordUpdate @_memberID=?, @_passwordO=?, @_passwordN=?",
+        return DB::select($this->contStr. "EXEC SSP_MemberPasswordUpdate @_memberID=?, @_passwordO=?, @_passwordN=?",
             array($_memberID, $_passwordO, $_passwordN));
     }
 
@@ -101,7 +110,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function addPasswordErrorCount($_memberID){
-        return DB::update("EXEC SSP_MemberPasswordErrprCountAdd @_memberID=?", array($_memberID));
+        return DB::update($this->contStr. "EXEC SSP_MemberPasswordErrprCountAdd @_memberID=?", array($_memberID));
     }
 
     /**
@@ -109,7 +118,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function clearPasswordErrorCount($_memberID){
-        return DB::update("EXEC SSP_MemberPasswordErrprCountClear @_memberID=?", array($_memberID));
+        return DB::update($this->contStr. "EXEC SSP_MemberPasswordErrprCountClear @_memberID=?", array($_memberID));
     }
 
 
@@ -118,7 +127,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function getMemberDetail($_memberID){
-        return DB::select("EXEC SSP_MemberDetail @_memberID=?", array($_memberID));
+        return DB::select($this->contStr. "EXEC SSP_MemberDetail @_memberID=?", array($_memberID));
     }
 
     /**
@@ -126,7 +135,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function getMemberDetailSimple($_memberID){
-        return DB::select("EXEC SSP_MemberDetailSimple @_memberID=?", array($_memberID));
+        return DB::select($this->contStr. "EXEC SSP_MemberDetailSimple @_memberID=?", array($_memberID));
     }
 
         /**
@@ -134,7 +143,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function checkVerification($_memberID){
-        return DB::select("EXEC SSP_MemberVerificationCheck @_memberID=?", array($_memberID));
+        return DB::select($this->contStr. "EXEC SSP_MemberVerificationCheck @_memberID=?", array($_memberID));
     }
 
     /**
@@ -143,7 +152,7 @@ class member_repository{
      * @param  string   $_verification  驗證碼
      */
     public function updateVerification($_memberID, $_verification){
-        return DB::select("EXEC SSP_MemberVerificationUpdate @_memberID=?, @_verification=?", array($_memberID, $_verification));
+        return DB::select($this->contStr. "EXEC SSP_MemberVerificationUpdate @_memberID=?, @_verification=?", array($_memberID, $_verification));
     }
 
     /**
@@ -151,7 +160,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function clearVerification($_memberID){
-        return DB::select("EXEC SSP_MemberVerificationClear @_memberID=?", array($_memberID));
+        return DB::select($this->contStr. "EXEC SSP_MemberVerificationClear @_memberID=?", array($_memberID));
     }
 
     /**
@@ -159,7 +168,7 @@ class member_repository{
      * @param  int $_memberID 會員編號
      */
     public function getVerificationDate($_memberID){
-        return DB::select("EXEC SSP_MemberVerificationDate @_memberID=?", array($_memberID));
+        return DB::select($this->contStr. "EXEC SSP_MemberVerificationDate @_memberID=?", array($_memberID));
     }
 
    /**
@@ -168,6 +177,6 @@ class member_repository{
      * @param  string   $_verification  驗證碼
      */
     public function updateVerificationDate($_memberID, $_verification){
-        return DB::select("EXEC SSP_MemberVerificationDateUpdate @_memberID=?, @_verification=?", array($_memberID,  $_verification));
+        return DB::select($this->contStr. "EXEC SSP_MemberVerificationDateUpdate @_memberID=?, @_verification=?", array($_memberID,  $_verification));
     }
 }
