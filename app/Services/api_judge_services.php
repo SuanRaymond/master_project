@@ -273,7 +273,7 @@ class api_judge_services{
 					//取得會員資料
 			    	$db = $admin_repository->checkLoginBase($this->system->account);
 					if(empty($db)){
-						return $this->respone(301);
+						return $this->respone(300);
 					}
 					//將資料空白去除
 					foreach($db as $row){
@@ -281,7 +281,7 @@ class api_judge_services{
 					}
 					//判斷是不是管理員
 					if($this->system->member->sgroupID > 200){
-						return $this->respone(302);
+						return $this->respone(301);
 					}
 					break;
 
@@ -333,12 +333,9 @@ class api_judge_services{
 
 				case 'SCG':
 					//權限代碼是否輸入
-			    	if(!isset($this->system->groupID)){
-			    		return $this->respone(340);
-			    	}
 					$db = with(new group_repository())->checkGroupID($this->system->groupID);
 					if(empty($db)){
-						return $this->respone(341);
+						return $this->respone(340);
 					}
 					$result = false;
 					if(!empty($db)){
@@ -352,7 +349,7 @@ class api_judge_services{
 						$result = true;
 					}
 					if($result){
-						return $this->respone(342);
+						return $this->respone(341);
 					}
 					break;
 

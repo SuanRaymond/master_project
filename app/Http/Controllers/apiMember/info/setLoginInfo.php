@@ -45,7 +45,7 @@ class setLoginInfo extends Controller
                                $this->system->token, $this->system->ip);
 
         if(empty($db)){
-            with(new api_respone_services())->reAPI(200, $this->system);
+            with(new api_respone_services())->reAPI(500, $this->system);
         }
 
         //將欄位名稱改變
