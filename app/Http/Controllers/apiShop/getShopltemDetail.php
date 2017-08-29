@@ -41,18 +41,24 @@ class getShopltemDetail extends Controller
             with(new api_respone_services())->reAPI(500, $this->system);
         }
 
+        $this->system->imagesObject   = (object) array();
         $this->system->shopltemDetail = (object) array();
 
-        foreach($db as $row){
+        foreach($db as $rowID => $row){
             $_row = clone $row;
             foreach($_row as $key => $value){
                 $tempKey = $key;
                 $key = substr($key, 1);
                 $row->$key = $value;
                 unset($row->$tempKey);
+
+                //捨棄不需要的資料
+                unset($row->imagestype);
             }
-            $this->system->shopltemDetail = reSetKey($row);
+            $this->system->imagesObject->$rowID = $row->Images;
+            $this->system->shopltemDetail       = reSetKey($row);
         }
+        $this->system->shopltemDetail->images = $this->system->imagesObject;
 
         with(new api_respone_services())->reAPI(0, $this->system);
     }
