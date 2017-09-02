@@ -29,6 +29,7 @@ class api_respone_services
 				case 'Create':
 					$OutPut_Array['memberID'] = $_system->memberID;
 					break;
+				case 'RebateAdd':
 				case 'DetailUpdate':
 				case 'PasswordUpdate':
 				case 'VerificationCheck':
@@ -63,6 +64,9 @@ class api_respone_services
 				case 'VerificationDate':
 				case 'VerificationDateUpdate':
 					$OutPut_Array['VerificationDate'] = $_system->verificationDate;
+					break;
+				case 'RebateList':
+					$OutPut_Array['RebateList'] = $_system->rebateList;
 					break;
 			}
 		}

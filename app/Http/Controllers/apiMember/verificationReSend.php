@@ -67,7 +67,7 @@ class verificationReSend extends Controller
         foreach($db as $row){
             $this->system->result = $row->result;
         }
-
+        //更新驗證碼失敗
         if($this->system->result != 0){
             with(new api_respone_services())->reAPI(521, $this->system);
         }

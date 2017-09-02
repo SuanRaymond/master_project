@@ -58,6 +58,28 @@ Route::post('/VerificationDateUpdate', 'verificationDateUpdate@index');
 Route::post('/VerificationReSend', 'verificationReSend@index');
 
 
+//藏蛋返利清單
+Route::post('/RebateList', 'rebateAdd@rebateList');
+
+//購買藏蛋返利
+Route::post('/RebateAdd', 'rebateAdd@rebateAdd');
+
+//今日任務
+Route::post('/GetRebateTaskToday', 'rebateTask@today');
+
+//今日任務清單
+Route::post('/GetRebateTaskList', 'rebateTask@list');
+
+//今日簽到
+Route::post('/CheckinRebate', 'rebateTask@checkin');
+
+//今日刮刮卡
+Route::post('/GetRebateTaskScratchCard', 'rebateTask@scratchCard');
+
+//今日金蛋返利
+Route::post('/GetRebateMoneyBack', 'rebateTask@moneyBack');
+
+
 
 // //保持登入
 // Route::post('/SetLog', 'info\setLoginInfo@index');

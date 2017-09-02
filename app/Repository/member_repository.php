@@ -179,4 +179,63 @@ class member_repository{
     public function updateVerificationDate($_memberID, $_verification){
         return DB::select($this->contStr. "EXEC SSP_MemberVerificationDateUpdate @_memberID=?, @_verification=?", array($_memberID,  $_verification));
     }
+
+
+    /**
+     * 藏蛋返利清單
+     * @param  int $_memberID 會員編號
+     */
+    public function getRebateList($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_RebateList @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 購買藏蛋返利
+     * @param  int $_memberID   會員編號
+     * @param  int $_rebateType 購買總類
+     */
+    public function addRebate($_memberID, $_rebateType){
+        return DB::select($this->contStr. "EXEC SSP_RebateAdd @_memberID=?, @_rebateType=?", array($_memberID, $_rebateType));
+    }
+
+    /**
+     * 今日任務 確認是否有藏蛋
+     * @param  int $_memberID 會員編號
+     */
+    public function getRebateTaskToday($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_RebateTaskToday @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 今日任務清單
+     * @param  int $_memberID 會員編號
+     */
+    public function getRebateTaskList($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_RebateTaskList @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 今日簽到
+     * @param  int $_memberID 會員編號
+     */
+    public function checkinRebate($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_RebateCheckin @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 今日刮刮卡
+     * @param  int $_memberID 會員編號
+     */
+    public function getRebateTaskScratchCard($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_RebateTaskScratchCard @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 今日金蛋返利
+     * @param  int $_memberID   會員編號
+     * @param  int $_scratchID  刮刮卡卡號
+     */
+    public function getRebateMoneyBack($_memberID, $_scratchID){
+        return DB::select($this->contStr. "EXEC SSP_RebateMoneyBack @_memberID=?, @_scratchID=?", array($_memberID, $_scratchID));
+    }
 }
