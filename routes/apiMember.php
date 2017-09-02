@@ -71,7 +71,7 @@ Route::post('/GetRebateTaskToday', 'rebateTask@today');
 Route::post('/GetRebateTaskList', 'rebateTask@list');
 
 //今日簽到
-Route::post('/CheckinRebate', 'rebateTask@checkin');
+Route::post('/CheckinRebateTask', 'rebateTask@checkin');
 
 //今日刮刮卡
 Route::post('/GetRebateTaskScratchCard', 'rebateTask@scratchCard');

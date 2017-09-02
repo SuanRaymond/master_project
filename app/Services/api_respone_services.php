@@ -34,6 +34,7 @@ class api_respone_services
 				case 'PasswordUpdate':
 				case 'VerificationCheck':
 				case 'VerificationReSend':
+				case 'CheckinRebateTask':
 					$OutPut_Array['Result'] = $_system->result;
 					break;
 				case 'SetLoginInfo':
@@ -67,6 +68,20 @@ class api_respone_services
 					break;
 				case 'RebateList':
 					$OutPut_Array['RebateList'] = $_system->rebateList;
+					break;
+				case 'GetRebateTaskToday':
+					$OutPut_Array['Status'] = $_system->status;
+					break;
+				case 'GetRebateTaskList':
+					$OutPut_Array['Checkin'] = $_system->checkin;
+					$OutPut_Array['ScratchCard'] = $_system->scratchCard;
+					break;
+				case 'GetRebateTaskScratchCard':
+					$OutPut_Array['ScratchID'] = $_system->scratchID;
+					$OutPut_Array['Odds'] = $_system->odds;
+					break;
+				case 'GetRebateMoneyBack':
+					$OutPut_Array['MoneyBack'] = $_system->moneyBack;
 					break;
 			}
 		}

@@ -218,8 +218,8 @@ class member_repository{
      * 今日簽到
      * @param  int $_memberID 會員編號
      */
-    public function checkinRebate($_memberID){
-        return DB::select($this->contStr. "EXEC SSP_RebateCheckin @_memberID=?", array($_memberID));
+    public function checkinRebateTask($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_RebateTaskCheckin @_memberID=?", array($_memberID));
     }
 
     /**
