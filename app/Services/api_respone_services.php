@@ -75,13 +75,12 @@ class api_respone_services
 				case 'GetRebateTaskList':
 					$OutPut_Array['Checkin'] = $_system->checkin;
 					$OutPut_Array['ScratchCard'] = $_system->scratchCard;
+					$OutPut_Array['CheckinCount'] = $_system->checkinCount;
 					break;
 				case 'GetRebateTaskScratchCard':
-					$OutPut_Array['ScratchID'] = $_system->scratchID;
-					$OutPut_Array['Odds'] = $_system->odds;
-					break;
-				case 'GetRebateMoneyBack':
 					$OutPut_Array['MoneyBack'] = $_system->moneyBack;
+					$OutPut_Array['ScratchID'] = $_system->scratchID;
+					$OutPut_Array['TaskOdds'] = $_system->taskOdds;
 					break;
 			}
 		}

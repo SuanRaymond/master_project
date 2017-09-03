@@ -54,6 +54,3 @@ Route::post('/CheckinRebateTask', 'rebateTask@checkin');
 
 //今日刮刮卡
 Route::post('/GetRebateTaskScratchCard', 'rebateTask@scratchCard');
-
-//今日金蛋返利
-Route::post('/GetRebateMoneyBack', 'rebateTask@moneyBack');

@@ -229,13 +229,4 @@ class member_repository{
     public function getRebateTaskScratchCard($_memberID){
         return DB::select($this->contStr. "EXEC SSP_RebateTaskScratchCard @_memberID=?", array($_memberID));
     }
-
-    /**
-     * 今日金蛋返利
-     * @param  int $_memberID   會員編號
-     * @param  int $_scratchID  刮刮卡卡號
-     */
-    public function getRebateMoneyBack($_memberID, $_scratchID){
-        return DB::select($this->contStr. "EXEC SSP_RebateMoneyBack @_memberID=?, @_scratchID=?", array($_memberID, $_scratchID));
-    }
 }
