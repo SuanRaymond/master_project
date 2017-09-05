@@ -2,7 +2,7 @@
 namespace App\Repository;
 
 use DB;
-//member SQL 輔助
+//admin SQL 輔助
 class admin_repository{
 
     public $contStr = '';
@@ -22,4 +22,11 @@ class admin_repository{
         return DB::select($this->contStr. "EXEC SSP_AdminCheckLogin @_account=?", array($_account));
     }
 
+    /**
+     * 後台選單
+     * @param  int $_groupID 權限代碼
+     */
+    public function getMenu($_groupID){
+        return DB::select($this->contStr. "EXEC SSP_ManagerMenu @_groupID=?", array($_groupID));
+    }
 }
