@@ -82,6 +82,14 @@ class api_respone_services
 					$OutPut_Array['ScratchID'] = $_system->scratchID;
 					$OutPut_Array['TaskOdds'] = $_system->taskOdds;
 					break;
+
+				/*後台使用*/
+				case 'Ctrl':
+					$OutPut_Array['Data'] = $_system->data;
+					break;
+				case 'GetImages':
+					$OutPut_Array['Data'] = $_system->images;
+					break;
 			}
 		}
 		else{
