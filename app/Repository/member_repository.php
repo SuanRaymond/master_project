@@ -138,7 +138,7 @@ class member_repository{
         return DB::select($this->contStr. "EXEC SSP_MemberDetailSimple @_memberID=?", array($_memberID));
     }
 
-        /**
+    /**
      * 驗證驗證碼
      * @param  int $_memberID 會員編號
      */
@@ -228,5 +228,15 @@ class member_repository{
      */
     public function getRebateTaskScratchCard($_memberID){
         return DB::select($this->contStr. "EXEC SSP_RebateTaskScratchCard @_memberID=?", array($_memberID));
+    }
+
+    /**
+     * 寫入刮刮卡 賽果
+     * @param  int    $_scratchID 卡號
+     * @param  int    $_type      刮刮樂種類
+     * @param  string $_result    結果
+     */
+    public function setRebateTaskScratchCardResult($_scratchID, $_type, $_result){
+        return DB::select($this->contStr. "EXEC SSP_RebateTaskScratchCardResult @_scratchID=?, @_type=?, @_result=?", array($_scratchID, $_type, $_result));
     }
 }

@@ -185,6 +185,83 @@ class rebateTask extends Controller
             with(new api_respone_services())->reAPI(535, $this->system);
         }
 
+        //8個獎項 3個相同即中獎
+        if($this->system->type == 0){
+            $oddsDetail = array();
+
+            for($i = 0; $i < 8;){
+                if($i <= 4)
+                {
+                    $rand = rand(8,15) * 10;
+                    if ($rand == $this->system->taskOdds)
+                        continue;
+
+                    array_push($oddsDetail, $rand);
+                    $arrayCount = array_count_values($oddsDetail);
+
+                    if(in_array(3, $arrayCount)){
+                        array_pop($oddsDetail);
+                        continue;
+                    }
+                }
+                else
+                {
+                    array_push($oddsDetail, $this->system->taskOdds);
+                }
+
+                $i++;
+            }
+
+            shuffle($oddsDetail);
+            $this->system->oddsDetail = (object) $oddsDetail;
+        }
+        //1區2個 1區6個 兩區數字相同為獎項
+        else if($this->system->type == 1){
+            $oddsDetail1 = array();
+            $oddsDetail2 = array();
+            for($i = 0; $i < 8;){
+                if($i == 0)
+                {
+                    array_push($oddsDetail1, $this->system->taskOdds);
+                }
+                else if($i == 1)
+                {
+                    $rand = rand(13,15) * 10;
+                    if($this->system->taskOdds >= 120)
+                        $rand = rand(8,10) * 10;
+
+                    if ($rand == $this->system->taskOdds)
+                        continue;
+
+                    array_push($oddsDetail1, $rand);
+                }
+                else if($i == 2)
+                {
+                    array_push($oddsDetail2, $this->system->taskOdds);
+                }
+                else
+                {
+                    $rand = rand(8,15) * 10;
+                    if ($rand == $this->system->taskOdds || $rand == $oddsDetail1[1])
+                        continue;
+
+                    array_push($oddsDetail2, $rand);
+                }
+
+                $i++;
+            }
+
+            $index1 = 0;
+            $index2 = 1;
+            shuffle($oddsDetail1);
+            shuffle($oddsDetail2);
+            $this->system->oddsDetail = (object) array();
+            $this->system->oddsDetail->$index1 = (object) $oddsDetail1;
+            $this->system->oddsDetail->$index2 = (object) $oddsDetail2;
+        }
+
+        //寫入賽果
+        with(new member_repository())->setRebateTaskScratchCardResult($this->system->scratchID, $this->system->type, json_encode($this->system->oddsDetail));
         with(new api_respone_services())->reAPI(0, $this->system);
     }
 }

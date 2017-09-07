@@ -80,7 +80,9 @@ class api_respone_services
 				case 'GetRebateTaskScratchCard':
 					$OutPut_Array['MoneyBack'] = $_system->moneyBack;
 					$OutPut_Array['ScratchID'] = $_system->scratchID;
+					$OutPut_Array['Type'] 	  = $_system->type;
 					$OutPut_Array['TaskOdds'] = $_system->taskOdds;
+					$OutPut_Array['OddsDetail'] = $_system->oddsDetail;
 					break;
 
 				/*後台使用*/

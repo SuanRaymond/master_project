@@ -185,7 +185,7 @@ class rebateTask extends Controller
          /**
         寫入會員登入資料
         1、從前端接收POST資訊，需取得：
-            A：Params：加密後的資料JSON（{"MemberID":"會員唯一碼"}）
+            A：Params：加密後的資料JSON（{"MemberID":"會員唯一碼","Type":"刮刮樂種類"}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、密碼加密
@@ -215,6 +215,7 @@ class rebateTask extends Controller
         $this->system->action                       = '[communication_setdata]';
         $this->system->sendParams                   = [];
         $this->system->sendParams['MemberID']       = $this->system->memberID;
+        $this->system->sendParams['Type']           = $this->system->type;
 
         //送出資料
         $this->system->action    = '[communication_send_post]';
@@ -234,7 +235,9 @@ class rebateTask extends Controller
         $this->system->action = '[reorderdata]';
         $this->system->moneyBack = $this->system->result->MoneyBack;
         $this->system->scratchID = $this->system->result->ScratchID;
-        $this->system->taskOdds = $this->system->result->TaskOdds;
+        $this->system->type      = $this->system->result->Type;
+        $this->system->taskOdds  = $this->system->result->TaskOdds;
+        $this->system->oddsDetail  = $this->system->result->OddsDetail;
 
         with(new api_respone_services())->reAPI(0, $this->system);
     }
