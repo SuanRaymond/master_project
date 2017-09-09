@@ -238,7 +238,7 @@ class rebateTask extends Controller
         $this->system->type      = $this->system->result->Type;
         $this->system->taskOdds  = $this->system->result->TaskOdds;
         $this->system->oddsDetail  = $this->system->result->OddsDetail;
-
+dd(1111);
         with(new api_respone_services())->reAPI(0, $this->system);
     }
 }
