@@ -260,10 +260,11 @@ class rebateTask extends Controller
             $this->system->oddsDetail->$index2 = (object) $oddsDetail2;
         }
 
+dd($this->system);
         //寫入賽果
         with(new member_repository())->setRebateTaskScratchCardResult($this->system->scratchID, $this->system->type, json_encode($this->system->oddsDetail));
 
-        dd(1111111);
+
         with(new api_respone_services())->reAPI(0, $this->system);
     }
 }
