@@ -202,7 +202,7 @@ class rebateTask extends Controller
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
-
+dd($this->system);
         /*----------------------------------與廠商溝通----------------------------------*/
         //放入連線區塊
         $this->system->action = '[communication]';
