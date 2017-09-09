@@ -160,13 +160,13 @@ class rebateTask extends Controller
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
-dd($this->system);
+
         $db = with(new member_repository())->getRebateTaskScratchCard($this->system->memberID);
 
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);
         }
-
+dd($db);
        //將欄位名稱改變
         $this->system->action = '[reorderdata]';
         foreach($db as $row){
