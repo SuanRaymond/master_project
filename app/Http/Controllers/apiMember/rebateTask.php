@@ -262,9 +262,8 @@ class rebateTask extends Controller
 
 
         //寫入賽果
-        with(new member_repository())->setRebateTaskScratchCardResult($this->system->scratchID, $this->system->type, json_encode($this->system->oddsDetail));
-dd(11111);
-
+        with(new member_repository())->setRebateTaskScratchCardResult($this->system->scratchID, $this->system->type, "123464645131"));
+dd($this->system);
         with(new api_respone_services())->reAPI(0, $this->system);
     }
 }
