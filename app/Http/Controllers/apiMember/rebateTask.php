@@ -166,7 +166,7 @@ class rebateTask extends Controller
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);
         }
-dd($db);
+
        //將欄位名稱改變
         $this->system->action = '[reorderdata]';
         foreach($db as $row){
@@ -259,7 +259,7 @@ dd($db);
             $this->system->oddsDetail->$index1 = (object) $oddsDetail1;
             $this->system->oddsDetail->$index2 = (object) $oddsDetail2;
         }
-
+dd($this->system);
         //寫入賽果
         with(new member_repository())->setRebateTaskScratchCardResult($this->system->scratchID, $this->system->type, json_encode($this->system->oddsDetail));
         with(new api_respone_services())->reAPI(0, $this->system);
