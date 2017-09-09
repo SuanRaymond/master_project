@@ -90,7 +90,7 @@ class member_repository{
      * @param  string   $_cardID        卡號
      */
     public function updateMemberDetail($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_cardID){
-        return DB::select(/*$this->contStr. */"EXEC SSP_MemberDetailUpdate @_memberID=?, @_name=?, @_mail=?, @_address=?, @_birthday=?, @_gender=?, @_languageID=?, @_cardID=?", 
+        return DB::select($this->contStr. "EXEC SSP_MemberDetailUpdate @_memberID=?, @_name=?, @_mail=?, @_address=?, @_birthday=?, @_gender=?, @_languageID=?, @_cardID=?", 
             array($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_cardID));
     }
 
