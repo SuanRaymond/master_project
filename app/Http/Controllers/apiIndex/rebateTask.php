@@ -220,7 +220,6 @@ class rebateTask extends Controller
         //送出資料
         $this->system->action    = '[communication_send_post]';
         $this->system->result    = with(new connection_services())->callApi($this->system);
-        dd($this->system->result);
         $this->system->getResult = $this->system->result;
 
         //檢查廠商回傳資訊
