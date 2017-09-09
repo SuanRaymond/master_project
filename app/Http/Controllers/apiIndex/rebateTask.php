@@ -239,6 +239,12 @@ class rebateTask extends Controller
         $this->system->taskOdds  = $this->system->result->TaskOdds;
         $this->system->oddsDetail  = $this->system->result->OddsDetail;
 
+        $this->system->moneyBack = 1;
+        $this->system->scratchID = 144556;
+        $this->system->type      = 0;
+        $this->system->taskOdds  = 100;
+        $this->system->oddsDetail  = 1546;
+
         with(new api_respone_services())->reAPI(0, $this->system);
     }
 }
