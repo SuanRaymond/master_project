@@ -160,9 +160,9 @@ class rebateTask extends Controller
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
-dd($this->system);
-        $db = with(new member_repository())->getRebateTaskScratchCard($this->system->memberID);
 
+        $db = with(new member_repository())->getRebateTaskScratchCard($this->system->memberID);
+dd($db);
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);
         }
