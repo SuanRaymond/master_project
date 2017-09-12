@@ -14,3 +14,6 @@ Route::post('/GetImages', 'images@search');
 
 //上傳圖片資訊
 Route::post('/InsertImages', 'images@insert');
+
+//新增商品
+Route::post('/AddCommodity', 'commodity@add');

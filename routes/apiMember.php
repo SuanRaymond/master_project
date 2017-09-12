@@ -24,6 +24,9 @@ Route::post('/DetailSimple', 'detailSimple@index');
 //修改會員密碼
 Route::post('/PasswordUpdate', 'passwordUpdate@index');
 
+//修改會員照片
+Route::post('/PhotoUpdate', 'detailUpdate@photoUpdate');
+
 //設定登入資訊
 Route::post('/SetLoginInfo', 'info\setLoginInfo@index');
 

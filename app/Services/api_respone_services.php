@@ -30,6 +30,7 @@ class api_respone_services
 					$OutPut_Array['memberID'] = $_system->memberID;
 					break;
 				case 'RebateAdd':
+				case 'PhotoUpdate':
 				case 'DetailUpdate':
 				case 'PasswordUpdate':
 				case 'VerificationCheck':
@@ -44,7 +45,7 @@ class api_respone_services
 				case 'GetMenu':
 					$OutPut_Array['Menu'] = $_system->menu;
 					break;
-				case 'ShopltemAdd':
+				case 'AddCommodity':
 					$OutPut_Array['ShopID'] = $_system->shopID;
 					break;
 				case 'GetMenuCommodity':

@@ -105,6 +105,16 @@ class member_repository{
             array($_memberID, $_passwordO, $_passwordN));
     }
 
+        /**
+     * 修改會員照片
+     * @param  int          $_memberID 會員編號
+     * @param  string       $_photo     照片
+     */
+    public function updatePhoto($_memberID, $_photo){
+        return DB::select($this->contStr. "EXEC SSP_MemberPhotoUpdate @_memberID=?, @_photo=?",
+            array($_memberID, $_photo));
+    }
+
     /**
      * 增加會員密碼錯誤次數一次
      * @param  int $_memberID 會員編號

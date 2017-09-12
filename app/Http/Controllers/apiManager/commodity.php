@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\ApiShop;
+namespace App\Http\Controllers\ApiManager;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\entrance;
 
-use App\Repository\shop_repository;
+use App\Repository\commodity_repository;
 
 use App\Services\api_judge_services;
 use App\Services\api_respone_services;
-class shopltemAdd extends Controller
+class commodity extends Controller
 {
 	//共用參數
     public $system;
@@ -31,10 +31,11 @@ class shopltemAdd extends Controller
         $this->system = with(new entrance())->verification();
     }
 
-    public function index()
+    public function add()
     {
         $this->system->action = '[judge]';
-        $db = with(new shop_repository())->addShopltem($this->system->title, $this->system->subtitle, $this->system->menuID, $this->system->price, $this->system->points, $this->system->transport, $this->system->quantity, $this->system->style, $this->system->detail, $this->system->norm, $this->system->memo);
+
+        $db = with(new commodity_repository())->addCommodity($this->system->title, $this->system->subtitle, $this->system->menuID, $this->system->price, $this->system->points, $this->system->transport, $this->system->quantity, $this->system->style, $this->system->detail, $this->system->norm, $this->system->memo);
 
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);

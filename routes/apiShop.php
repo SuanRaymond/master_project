@@ -6,9 +6,6 @@ Route::any('/', function(){
     abort(404);
 });
 
-//新增商品
-Route::post('/ShopltemAdd', 'shopltemAdd@index');
-
 //取Menu
 Route::post('/GetMenu', 'getMenu@index');
 
