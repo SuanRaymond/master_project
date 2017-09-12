@@ -87,6 +87,8 @@ class login extends Controller
             unset($this->system->member->$tempKey);
         }
 
+        $this->system->member = reSetKey($this->system->member);
+
     	with(new api_respone_services())->reAPI(0, $this->system);
     }
 }
