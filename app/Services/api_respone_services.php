@@ -93,6 +93,9 @@ class api_respone_services
 				case 'GetImages':
 					$OutPut_Array['Data'] = $_system->images;
 					break;
+				case 'GetCommodity':
+					$OutPut_Array['Data'] = $_system->commodity;
+					break;
 			}
 		}
 		else{

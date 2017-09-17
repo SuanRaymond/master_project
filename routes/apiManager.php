@@ -17,3 +17,9 @@ Route::post('/InsertImages', 'images@insert');
 
 //新增商品
 Route::post('/AddCommodity', 'commodity@add');
+
+//取商品
+Route::post('/GetCommodity', 'commodity@get');
+
+//更新商品
+Route::post('/UpdateCommodity', 'commodity@update');

@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Repository\group_repository;
 use App\Repository\member_repository;
 use App\Repository\admin_repository;
+use App\Repository\shop_repository;
 
 class api_judge_services{
 
@@ -28,6 +29,7 @@ class api_judge_services{
 		$this->system->status = 0;
 		$member_repository    = new member_repository();
 		$admin_repository     = new admin_repository();
+		$shop_repository     = new shop_repository();
 		foreach($_switch as $key){
 			switch($key){
 				/************** 確認資訊 **************/
@@ -373,6 +375,75 @@ class api_judge_services{
 					}
 					break;
 
+				/************** 後台 **************/
+
+				case 'MCT':
+					//標題是否輸入
+			    	if(!isset($this->system->title)){
+			    		return $this->respone(600);
+			    	}
+			    	//標題是否輸入
+			    	if($this->system->title == ''){
+			    		return $this->respone(601);
+			    	}
+			    	break;
+				case 'MCMID':
+			    	//menuID是否正確
+			    	if(!isset($this->system->menuID)){
+			    		return $this->respone(610);
+			    	}
+
+			    	$result = false;
+			    	$db = $shop_repository->getMenu();
+			    	foreach($db as $row){
+						if($this->system->menuID == $row->sMenuID){
+							$result = true;
+						}
+					}
+			    	if($result == false){
+			    		return $this->respone(611);
+			    	}
+			    	break;
+			    case 'MCP':
+			    	//售價是否輸入
+			    	if(!isset($this->system->price)){
+			    		return $this->respone(620);
+			    	}
+					//售價是否數字
+			     	if(!is_numeric($this->system->price)){
+			     		return $this->respone(621);
+			     	}
+			    	break;
+			    case 'MCPT':
+			    	//點數是否輸入
+			    	if(!isset($this->system->points)){
+			    		return $this->respone(630);
+			    	}
+					//點數是否數字
+			     	if(!is_numeric($this->system->points)){
+			     		return $this->respone(631);
+			     	}
+			    	break;
+			    case 'MCTS':
+			    	//運費是否輸入
+			    	if(!isset($this->system->transport)){
+			    		return $this->respone(640);
+			    	}
+					//運費是否數字
+			     	if(!is_numeric($this->system->transport)){
+			     		return $this->respone(641);
+			     	}
+			    	break;
+			    case 'MCQ':
+			    	//售價是否輸入
+			    	if(!isset($this->system->quantity)){
+			    		return $this->respone(650);
+			    	}
+					//售價是否數字
+			     	if(!is_numeric($this->system->quantity)){
+			     		return $this->respone(651);
+			     	}
+			    	break;
 			}
 		}
 
