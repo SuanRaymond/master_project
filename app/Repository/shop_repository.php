@@ -76,4 +76,13 @@ class shop_repository{
         return DB::select($this->contStr. "EXEC SSP_MemberCommodityOrderUpdate @_memberID=?, @_shoporderID=?, @_status=?",
             array($_memberID, $_shoporderID, $_status));
     }
+
+    /**
+     * 取得會員訂單清單
+     * @param  int      $_memberID        會員編號
+     */
+    public function getMemberCommodityOrderList($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_MemberCommodityOrderList @_memberID=?",
+            array($_memberID));
+    }
 }

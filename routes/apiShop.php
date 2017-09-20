@@ -16,10 +16,13 @@ Route::post('/GetMenuCommodity', 'getMenuCommodity@index');
 Route::post('/GetShopltemDetail', 'getShopltemDetail@index');
 
 //新增會員訂單
-Route::post('/CommodityOrderAdd', 'commodityOrderAdd@index');
+Route::post('/CommodityOrderAdd', 'commodityOrder@add');
 
 //修改會員訂單
-Route::post('/CommodityOrderUpdate', 'commodityOrderUpdate@index');
+Route::post('/CommodityOrderUpdate', 'commodityOrder@update');
+
+//修改會員訂單
+Route::post('/CommodityOrderList', 'commodityOrder@list');
 
 //取購物車商品
 Route::post('/GetShopltemCar', 'getShopltemCar@index');

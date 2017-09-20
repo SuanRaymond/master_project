@@ -60,6 +60,9 @@ class api_respone_services
 				case 'CommodityOrderUpdate':
 					$OutPut_Array['Result'] = $_system->result;
 					break;
+				case 'CommodityOrderList':
+					$OutPut_Array['List'] = $_system->list;
+					break;
 				case 'GetShopltemCar':
 					$OutPut_Array['GetShopltemCar'] = $_system->shopltemCar;
 					break;
