@@ -22,7 +22,7 @@ class detail extends Controller
         3、比對帳號是否合法
         4、取得 API 內帳號資料
         5、輸出完整資料
-        {"Result":"狀態","Member":{"account":"帳號","name":"暱稱","points":"點數","integral":"積分","bonus":"紅利","memberID":"會員編號"},"mail":"信箱","address":"地址","birthday":"生日","gender":"性別","cardID":"銀行卡","LanguageID":"語言"}
+        {"Result":"狀態","Member":{"account":"帳號","name":"暱稱","points":"點數","integral":"積分","bonus":"紅利","memberID":"會員編號"},"mail":"信箱","address":"地址","birthday":"生日","gender":"性別","cardID":"銀行卡","LanguageID":"語言","UpID":"上層會員編號"}
      */
 
     public function __construct()
