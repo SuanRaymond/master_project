@@ -91,13 +91,13 @@ class commodityOrder extends Controller
         /**
         登入
         1、從前端接收POST資訊，需取得：
-            A：Params：加密後的資料JSON（{"memberID":"會員編號","shoporderID":"訂單編號","status":"狀態"}）
+            A：Params：加密後的資料JSON（{"memberID":"會員編號"}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、比對帳號是否合法
         4、取得 API 內帳號資料
         5、輸出完整資料
-        {"Result":"狀態"}
+        {"Result":"List":{"訂單編號":{"shoporderID":"訂單編號","memberID":"會員編號","title":"商品名稱","price":"售價","points":"點數","status":"商品狀態","bDate":"購買日期","images":"圖片"}}}
     */
     
     public function list()

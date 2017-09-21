@@ -36,7 +36,7 @@ class create extends Controller
     public function index()
     {
     	$this->system->action = '[judge]';
-        $this->system = with(new api_judge_services($this->system))->check(['CMA', 'CPW', 'CMN', 'CMM', 'SMRG', 'SMRM', 'SCG', 'SMUG']);
+        $this->system = with(new api_judge_services($this->system))->check(['CMA', 'CPW', 'CMN', 'CMM', 'SMRG', 'SCG', 'SMUG']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }

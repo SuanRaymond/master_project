@@ -50,6 +50,9 @@ class api_judge_services{
 			     	if(!is_numeric($this->system->account)){
 			     		return $this->respone(123);
 			     	}
+			     	if(!preg_match("/^([0-9]+)$/", $this->system->account)){
+			    		return $this->respone(133);
+					}
 					break;
 				case 'CPW':
 					//密碼是否輸入
