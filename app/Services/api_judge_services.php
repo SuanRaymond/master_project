@@ -91,18 +91,22 @@ class api_judge_services{
 			    	if(!isset($this->system->mail)){
 			    		return $this->respone(150);
 			    	}
-			    	//信箱是否過長
-			    	if(strlen($this->system->mail) > 50){
-			    		return $this->respone(151);
-					}
-					//信箱是否過短
-					if(strlen($this->system->mail) < 3){
-						return $this->respone(152);
-					}
-					//信箱是否符合規則
-			    	if(!preg_match("/^[\w]*@[\w-]+(\.[\w-]+)+$/", $this->system->mail)){
-			    		return $this->respone(153);
-					}
+			    	if($this->system->mail != '')
+			    	{
+			    		//信箱是否過長
+				    	if(strlen($this->system->mail) > 50){
+				    		return $this->respone(151);
+						}
+						//信箱是否過短
+						if(strlen($this->system->mail) < 3){
+							return $this->respone(152);
+						}
+						//信箱是否符合規則
+				    	if(!preg_match("/^[\w]*@[\w-]+(\.[\w-]+)+$/", $this->system->mail)){
+				    		return $this->respone(153);
+						}
+			    	}
+
 					break;
 
 				case 'CMG':
