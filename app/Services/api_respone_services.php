@@ -93,6 +93,12 @@ class api_respone_services
 				case 'Ctrl':
 					$OutPut_Array['Data'] = $_system->data;
 					break;
+				case 'TreeUp':
+					$OutPut_Array['Data'] = $_system->accountBread;
+					break;
+				case 'GetAccountList':
+					$OutPut_Array['Data'] = $_system->accountList;
+					break;
 				case 'GetImages':
 					$OutPut_Array['Data'] = $_system->images;
 					break;

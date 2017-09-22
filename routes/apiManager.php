@@ -6,8 +6,14 @@ Route::post('/Login', 'login@index');
 //取得控制項
 Route::post('/Ctrl', 'ctrl@index');
 
+//取得麵包屑
+Route::post('/TreeUp', 'treeUp@index');
+
 //選單
 Route::post('/GetMenu', 'getMenu@index');
+
+//取得會員資料列表
+Route::post('/GetAccountList', 'account\accountList@index');
 
 //取得圖片資訊
 Route::post('/GetImages', 'images@search');

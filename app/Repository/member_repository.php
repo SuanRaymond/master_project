@@ -38,6 +38,15 @@ class member_repository{
     }
 
     /**
+     * 查詢會員編號－查詢者與被查詢者
+     * @param  string $_mineAccount  查詢者帳號
+     * @param  string $_account      被查詢者帳號
+     */
+    public function getMinAndMemberMemberID($_mineAccount, $_account){
+        return DB::select($this->contStr. "EXEC SSP_MinAndMemberMemberID @_mineAccount=?, @_account=?", array($_mineAccount, $_account));
+    }
+
+    /**
      * 確認會員編號是否存在
      * @param  int $_memberID 會員編號
      */
@@ -147,6 +156,19 @@ class member_repository{
     public function getMemberDetailSimple($_memberID){
         return DB::select($this->contStr. "EXEC SSP_MemberDetailSimple @_memberID=?", array($_memberID));
     }
+
+
+
+    /**
+     * 查詢會員清單
+     * @param  int $_memberID 會員編號
+     * @param  int $_memberID 會員編號
+     */
+    public function getAccountList($_mineMemberID, $_memberID, $_downType, $_row, $_page){
+        return DB::select($this->contStr. "EXEC SSP_AccountListGet @_minmemberID=?, @_memberID=?, @_DownType=?,@_row=?, @_page=?",
+                   array($_mineMemberID, $_memberID, $_downType, $_row, $_page));
+    }
+
 
     /**
      * 驗證驗證碼

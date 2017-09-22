@@ -29,7 +29,8 @@ class api_judge_services{
 		$this->system->status = 0;
 		$member_repository    = new member_repository();
 		$admin_repository     = new admin_repository();
-		$shop_repository     = new shop_repository();
+		$shop_repository      = new shop_repository();
+		$group_repository     = new group_repository();
 		foreach($_switch as $key){
 			switch($key){
 				/************** 確認資訊 **************/
@@ -292,6 +293,65 @@ class api_judge_services{
 					if($this->system->member->sgroupID > 200){
 						return $this->respone(301);
 					}
+					break;
+
+				case 'SMIDG':
+					$db = $member_repository->getMemberID($this->system->account);
+					if(empty($db)){
+						return $this->respone(351);
+					}
+
+					foreach($db as $row){
+						$this->system->memberID = $row->memberID;
+					}
+					break;
+				case 'SMLC-ID':
+					//先取得兩方ID
+					$db = $member_repository->getMinAndMemberMemberID($this->system->mineaccount, $this->system->account);
+					if(empty($db)){
+						//完全沒有
+						return $this->respone(351);
+					}
+
+					foreach($db as $row){
+						$this->system->mineMemberID = $row->Mine;
+						$this->system->logMemberID  = $row->Mine;
+						$this->system->memberID     = $row->Down;
+					}
+
+					if(is_null($this->system->mineMemberID)){
+						//找不到搜尋者
+						return $this->respone(352);
+					}
+					if(is_null($this->system->memberID)){
+						//找不到被搜尋者
+						return $this->respone(353);
+					}
+
+					//取得搜尋者的權限
+					$db = $group_repository->getMemberGroupID($this->system->mineMemberID);
+					if(empty($db)){
+						//找不到搜尋者的權限代碼
+						return $this->respone(354);
+					}
+
+					foreach($db as $row){
+						$this->system->mineGroupID = $row->groupID;
+					}
+
+					//判斷是不是管理層
+					if($this->system->mineGroupID < 200){
+						$this->system->mineMemberID = null;
+					}
+					else{
+						//判斷階層
+						$db = $group_repository->checkUnderLine($this->system->mineMemberID, $this->system->memberID);
+						if(empty($db)){
+							//被搜尋者不在搜尋者名下
+							return $this->respone(354);
+						}
+					}
+
 					break;
 
 				case 'SMGD':
