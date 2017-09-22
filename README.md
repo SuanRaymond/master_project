@@ -11,9 +11,6 @@ API_SHOP_DOMAIN={"0":"api.shop.dev"}
 # 後台
 API_MANAGER_DOMAIN={"0":"manager.member.dev"}
 
-# IP 對應金鑰
-API_MEMBER_KEY={"0.0.0.0":"base64:ltBjfB4BYYPZc2qBC89KlNTT2ZYcxJP8gyTHqnspJJU="}
-
 APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:ltBjfB4BYYPZc2qBC89KlNTT2ZYcxJP8gyTHqnspJJU=

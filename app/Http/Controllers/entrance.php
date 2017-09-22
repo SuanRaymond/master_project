@@ -70,16 +70,17 @@ class entrance extends Controller
             $this->callRespone(4);
     	}
         //IP 綁定金鑰
-        $apiMemberKey = env('API_MEMBER_KEY', []);
-        $apiMemberKey = json_decode($apiMemberKey, true);
-        foreach($this->system->serverIp as $serverIp){
-            if(isset($apiMemberKey[$serverIp])){
-                $this->system->reKey = $apiMemberKey[$serverIp];
-                if($this->system->reKey != ''){
-                    break;
-                }
-            }
-        }
+        // $apiMemberKey = env('API_MEMBER_KEY', []);
+        // $apiMemberKey = json_decode($apiMemberKey, true);
+        // foreach($this->system->serverIp as $serverIp){
+        //     if(isset($apiMemberKey[$serverIp])){
+        //         $this->system->reKey = $apiMemberKey[$serverIp];
+        //         if($this->system->reKey != ''){
+        //             break;
+        //         }
+        //     }
+        // }
+        $this->system->reKey = config('app.key');
         if($this->system->reKey == ''){
             $this->callRespone(5);
         }
