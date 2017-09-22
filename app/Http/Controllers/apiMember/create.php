@@ -41,7 +41,7 @@ class create extends Controller
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
 
-        $this->system->verification = str_random(6);
+        $this->system->verification = rand(100000,999999);
 
         $db = with(new member_repository())
                 ->addMember($this->system->account, $this->system->name, $this->system->password,
