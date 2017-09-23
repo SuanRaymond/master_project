@@ -82,9 +82,9 @@ class member_repository{
      * 寫入會員登入資料
      * @param  int $_memberID 會員編號
      */
-    public function setLoginInfo($_memberID, $_languageID, $_equipmentID, $_token, $_iP){
-        return DB::select($this->contStr. "EXEC SSP_MemberLoginInfoSet @_memberID=?, @_languageID=?, @_equipmentID=?, @_token=?, @_ip=?",
-                    array($_memberID, $_languageID, $_equipmentID, $_token, $_iP));
+    public function setLoginInfo($_memberID, $_languageID, $_equipmentID, $_token, $_iP, $_position){
+        return DB::select($this->contStr. "EXEC SSP_MemberLoginInfoSet @_memberID=?, @_languageID=?, @_equipmentID=?, @_token=?, @_ip=?, @_position=?",
+                    array($_memberID, $_languageID, $_equipmentID, $_token, $_iP, $_position));
     }
 
     /**

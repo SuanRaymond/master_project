@@ -42,7 +42,7 @@ class setLoginInfo extends Controller
 
         $db = with(new member_repository())
                 ->setLoginInfo($this->system->memberID, $this->system->languageID, $this->system->equipmentID,
-                               $this->system->token, $this->system->ip);
+                               $this->system->token, $this->system->ip, $this->system->position);
 
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);

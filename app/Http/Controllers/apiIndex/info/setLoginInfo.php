@@ -56,6 +56,7 @@ class setLoginInfo extends Controller
         $this->system->sendParams['EquipmentID']    = $this->system->equipmentID;
         $this->system->sendParams['Token']          = str_random(20);
         $this->system->sendParams['IP']             = $this->system->ip;
+        $this->system->sendParams['Position']       = $this->system->position;
 
         //送出資料
         $this->system->action    = '[communication_send_post]';
