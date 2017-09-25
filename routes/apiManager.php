@@ -15,6 +15,13 @@ Route::post('/GetMenu', 'getMenu@index');
 //取得會員資料列表
 Route::post('/GetAccountList', 'account\accountList@index');
 
+
+
+//取得購物報表
+Route::post('/GetShopOrderList', 'report\shopOrderList@index');
+
+
+
 //取得圖片資訊
 Route::post('/GetImages', 'images@search');
 
