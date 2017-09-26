@@ -39,6 +39,14 @@ Route::post('/VerificationDateUpdate', 'verificationDateUpdate@index');
 //重發驗證碼
 Route::post('/VerificationReSend', 'verificationReSend@index');
 
+//新增會員購買地址
+Route::post('/AddressAdd', 'address@add');
+
+//更新會員購買地址
+Route::post('/AddressUpdate', 'address@update');
+
+//取會員購買地址
+Route::post('/AddressList', 'address@list');
 
 //藏蛋返利清單
 Route::post('/RebateList', 'rebateAdd@rebateList');

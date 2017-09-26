@@ -157,7 +157,28 @@ class member_repository{
         return DB::select($this->contStr. "EXEC SSP_MemberDetailSimple @_memberID=?", array($_memberID));
     }
 
+    /**
+     * 取會員購買地址
+     * @param  int          $_memberID 會員編號
+     */
+    public function getMemberAddress($_memberID){
+        return DB::select($this->contStr. "EXEC SSP_MemberAddressGet @_memberID=?",
+            array($_memberID));
+    }
 
+    /**
+     * 更新會員購買地址
+     * @param  int          $_memberID  會員編號
+     * @param  int          $_index     更新哪組地址
+     * @param  string       $_addressee 收件人
+     * @param  string       $_phone     電話
+     * @param  string       $_address   地址
+     * @param  int          $_orderID   默認哪組地址
+     */
+    public function updateMemberAddress($_memberID, $_index, $_addressee, $_phone, $_address, $_default){
+        return DB::select($this->contStr. "EXEC SSP_MemberAddressUpdate @_memberID=?, @_index=?, @_addressee=?, @_phone=?, @_address=?, @_default=?",
+            array($_memberID, $_index, $_addressee, $_phone, $_address, $_default));
+    }
 
     /**
      * 查詢會員清單
