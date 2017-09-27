@@ -61,6 +61,9 @@ class api_respone_services
 					$OutPut_Array['Result'] = $_system->result;
 					break;
 				case 'AddressList':
+					$OutPut_Array['List'] = $_system->list;
+					$OutPut_Array['DefaultID'] = $_system->defaultID;
+					break;
 				case 'CommodityOrderList':
 					$OutPut_Array['List'] = $_system->list;
 					break;

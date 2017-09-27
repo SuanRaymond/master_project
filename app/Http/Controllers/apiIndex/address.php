@@ -191,6 +191,7 @@ class address extends Controller
         //整理輸出資料
         $this->system->action = '[reorderdata]';
         $this->system->list = $this->system->result->List;
+        $this->system->defaultID = $this->system->result->DefaultID;
 
         with(new api_respone_services())->reAPI(0, $this->system);
     }
