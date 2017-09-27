@@ -24,7 +24,7 @@ class address extends Controller
         修改會員資料
         1、從前端接收POST資訊，需取得：
             A：Params：加密後的資料JSON
-            （{"MemberID":"會員唯一碼","addressee":"收件人","phone":"電話","Address":"地址"}）
+            （{"MemberID":"會員唯一碼","addressee":"收件人","phone":"電話","Address":"地址","default":"是否為默認組"}}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、密碼加密
@@ -87,7 +87,7 @@ class address extends Controller
         $this->system->result = -1;
         foreach($db as $index => $row){
             if($row->addressee == '' && $row->phone == '' && $row->address == ''){
-                $result = with(new member_repository())->updateMemberAddress($this->system->memberID, $index, $this->system->addressee, $this->system->phone, $this->system->address, 0);
+                $result = with(new member_repository())->updateMemberAddress($this->system->memberID, $index, $this->system->addressee, $this->system->phone, $this->system->address, $this->system->default);
 
                 if(empty($result)){
                     with(new api_respone_services())->reAPI(500, $this->system);

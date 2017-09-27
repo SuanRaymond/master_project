@@ -22,7 +22,7 @@ class address extends Controller
         寫入會員登入資料
         1、從前端接收POST資訊，需取得：
             A：Params：加密後的資料JSON
-            （{"MemberID":"會員唯一碼","addressee":"收件人","phone":"電話","Address":"地址"}）
+            （{"MemberID":"會員唯一碼","addressee":"收件人","phone":"電話","Address":"地址","default":"是否為默認組"}}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、密碼加密
@@ -55,6 +55,7 @@ class address extends Controller
         $this->system->sendParams['Addressee']      = $this->system->addressee;
         $this->system->sendParams['Phone']          = $this->system->phone;
         $this->system->sendParams['Address']        = $this->system->address;
+        $this->system->sendParams['Default']        = $this->system->default;
 
         //送出資料
         $this->system->action    = '[communication_send_post]';
