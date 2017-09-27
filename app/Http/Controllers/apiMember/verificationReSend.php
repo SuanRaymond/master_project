@@ -58,7 +58,7 @@ class verificationReSend extends Controller
             with(new api_respone_services())->reAPI(520, $this->system);
         }
 
-        $this->system->verification = str_random(6);
+        $this->system->verification = rand(100000,999999);
 
         $db = with(new member_repository())->updateVerificationDate($this->system->memberID, $this->system->verification);
 
