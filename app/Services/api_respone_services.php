@@ -105,6 +105,8 @@ class api_respone_services
 					break;
 				case 'GetShopOrderList':
 					$OutPut_Array['Data'] = $_system->shopOrderList;
+				case 'GetRebateList':
+					$OutPut_Array['Data'] = $_system->rebateList;
 					break;
 				case 'GetImages':
 					$OutPut_Array['Data'] = $_system->images;

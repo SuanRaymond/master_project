@@ -39,16 +39,6 @@ class detailSimple extends Controller
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
 
-        //將欄位名稱改變
-        $this->system->action = '[reorderdata]';
-        $db            = clone $this->system->member;
-        foreach($db as $key => $value){
-            $tempKey                    = $key;
-            $key                        = substr($key, 1);
-            $this->system->member->$key = $value;
-            unset($this->system->member->$tempKey);
-        }
-
     	with(new api_respone_services())->reAPI(0, $this->system);
     }
 }
