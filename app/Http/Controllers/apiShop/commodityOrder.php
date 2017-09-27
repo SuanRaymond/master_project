@@ -22,7 +22,7 @@ class commodityOrder extends Controller
     /**
         登入
         1、從前端接收POST資訊，需取得：
-            A：Params：加密後的資料JSON（{"MemberID":"123","Item":{"商品編號":"數量","商品編號":"數量",......}})
+            A：Params：加密後的資料JSON（{"MemberID":"123","Addressee":"收件人","Phone":"電話","Address":"地址","Item":{"商品編號":"數量","商品編號":"數量",......}})
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、比對帳號是否合法
@@ -39,7 +39,7 @@ class commodityOrder extends Controller
         $item = $this->system->item;
 
         foreach($item as $index => $row){
-            $db = with(new shop_repository())->addMemberCommodityOrder($this->system->memberID, $index, $row);
+            $db = with(new shop_repository())->addMemberCommodityOrder($this->system->memberID, $index, $row, $this->system->addressee, $this->system->phone, $this->system->address);
 
             if(empty($db)){
                 with(new api_respone_services())->reAPI(500, $this->system);

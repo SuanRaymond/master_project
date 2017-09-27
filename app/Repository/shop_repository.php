@@ -45,25 +45,22 @@ class shop_repository{
      * @param  int      $_shopID      shopID
      */
     public function getShopltemCar($_shopID){
-        return DB::select($this->contStr. "EXEC SSP_ShopltemCarShopID @_shopID=?", 
+        return DB::select($this->contStr. "EXEC SSP_ShopltemCarShopID @_shopID=?",
             array($_shopID));
     }
 
         /**
      * 新增會員訂單
      * @param  int      $_memberID       會員編號
+     * @param  int      $_shopID         商品編號
+     * @param  int      $_quantity       數量
+     * @param  string   $_addressee      收件人
      * @param  string   $_phone          電話
      * @param  string   $_address        地址
-     * @param  int      $_shopID         商品編號
-     * @param  float    $_price          售價
-     * @param  float    $_points         積分
-     * @param  float    $_transport      運費
-     * @param  int      $_quantity       數量
-     * @param  string   $_memo           備註
      */
-    public function addMemberCommodityOrder($_memberID, $_shopID, $_quantity){
-        return DB::select($this->contStr. "EXEC SSP_MemberCommodityOrderAdd @_memberID=?, @_shopID=?, @_quantity=?",
-            array($_memberID, $_shopID, $_quantity));
+    public function addMemberCommodityOrder($_memberID, $_shopID, $_quantity, $_addressee, $_phone, $_address){
+        return DB::select($this->contStr. "EXEC SSP_MemberCommodityOrderAdd @_memberID=?, @_shopID=?, @_quantity=?, @_addressee=?, @_phone=?, @_address=?",
+            array($_memberID, $_shopID, $_quantity, $_addressee, $_phone, $_address));
     }
 
     /**
