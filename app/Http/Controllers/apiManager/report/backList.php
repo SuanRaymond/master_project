@@ -5,7 +5,7 @@ namespace App\Http\Controllers\apiManager\report;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\entrance;
 
-use App\Repository\shop_repository;
+use App\Repository\member_repository;
 
 use App\Services\api_judge_services;
 use App\Services\api_respone_services;
@@ -40,7 +40,7 @@ class backList extends Controller
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
 
-        $db = with(new shop_repository())->
+        $db = with(new member_repository())->
               getBackListCount($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
                                 $this->system->start, $this->system->end, $this->system->row, $this->system->page);
 
@@ -51,7 +51,7 @@ class backList extends Controller
         }
 
         if($count > 0){
-            $db = with(new shop_repository())->
+            $db = with(new member_repository())->
               getBackListSearch($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
                                 $this->system->start, $this->system->end, $this->system->row, $this->system->page);
 

@@ -112,6 +112,9 @@ class api_respone_services
 				case 'GetBackList':
 					$OutPut_Array['Data'] = $_system->backList;
 					break;
+				case 'GetTradeList':
+					$OutPut_Array['Data'] = $_system->tradeList;
+					break;
 				case 'GetImages':
 					$OutPut_Array['Data'] = $_system->images;
 					break;

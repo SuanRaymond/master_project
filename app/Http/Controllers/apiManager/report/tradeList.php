@@ -9,7 +9,7 @@ use App\Repository\member_repository;
 
 use App\Services\api_judge_services;
 use App\Services\api_respone_services;
-class rebateList extends Controller
+class tradeList extends Controller
 {
 	//共用參數
     public $system;
@@ -41,26 +41,49 @@ class rebateList extends Controller
         }
 
         $db = with(new member_repository())->
-              getRebateListCount($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
+              getTradeListCount($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
                                 $this->system->start, $this->system->end, $this->system->row, $this->system->page);
 
         $count                       = 0;
-        $this->system->rebateList = [];
+        $this->system->tradeList = [];
         foreach($db as $row){
             $count = $row->DataCount;
         }
 
         if($count > 0){
             $db = with(new member_repository())->
-              getRebateListSearch($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
+              getTradeListSearch($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
                                 $this->system->start, $this->system->end, $this->system->row, $this->system->page);
 
             foreach($db as $key => $row){
-                $this->system->rebateList[] = reSetKey($row);
+
+                if($row->Status == 1)
+                {
+                    $row->before = $row->PointsBefore;
+                    $row->after = $row->PointsAfter;
+                }
+                else if($row->Status == 2)
+                {
+                    $row->before = $row->IntegralBefore;
+                    $row->after = $row->IntegralAfter;
+                }
+                else if($row->Status == 3)
+                {
+                    $row->before = $row->BounsBefore;
+                    $row->after = $row->BounsAfter;
+                }
+
+                unset($row->PointsBefore);
+                unset($row->PointsAfter);
+                unset($row->IntegralBefore);
+                unset($row->IntegralAfter);
+                unset($row->BounsBefore);
+                unset($row->BounsAfter);
+                $this->system->tradeList[] = reSetKey($row);
             }
         }
 
-        $this->system->rebateList['count'] = $count;
+        $this->system->tradeList['count'] = $count;
 
         with(new api_respone_services())->reAPI(0, $this->system);
     }

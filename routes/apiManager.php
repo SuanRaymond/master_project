@@ -24,6 +24,9 @@ Route::post('/GetRebateList', 'report\rebateList@index');
 //取得返利報表
 Route::post('/GetBackList', 'report\backList@index');
 
+//取得返利報表
+Route::post('/GetTradeList', 'report\tradeList@index');
+
 //取得圖片資訊
 Route::post('/GetImages', 'images@search');
 
