@@ -31,6 +31,11 @@ SEND_MAIL_URL=http://sms-get.com/api_send.php
 SEND_MAIL_ACCOUNT=ryb5478
 SEND_MAIL_PASSWORD=ryb54785478
 
+# 刷卡機制
+SEND_CARD_URL=https://www.esafe.com.tw/Service/Etopm.aspx
+SEND_CARD_KEY=S1710030352
+SEND_CARD_PAS=RyB5478rYb
+
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
 SESSION_DRIVER=file
