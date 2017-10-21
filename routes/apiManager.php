@@ -1,5 +1,13 @@
 <?php
 
+/*** 信用卡回傳 ***/
+//回傳成功
+Route::post('/payCardSuccess', 'payCard\payCard@success');
+
+//回傳失敗
+Route::post('/payCardError', 'payCard\payCard@error');
+/*** 信用卡回傳 ***/
+
 //登入
 Route::post('/Login', 'login@index');
 
