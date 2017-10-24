@@ -76,5 +76,13 @@ class payCard extends Controller
         
     }
 
+
+    public function error()
+    {
+        
+    }
+
+    
+
 }
 

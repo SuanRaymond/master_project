@@ -83,9 +83,46 @@ class shop_repository{
             array($_memberID));
     }
 
+    /**
+     * 取得會員訂單資訊
+     * @param  int      $_memberID        會員編號
+     */
+    public function getMemberCommodityOrderDetail($_shoporderID){
+        return DB::select($this->contStr. "EXEC SSP_MemberCommodityOrderDetail @_shoporderID=?",
+            array($_shoporderID));
+    }
 
+    /**
+     * 會員付款結帳-取信用卡傳送資訊
+     * @param  int      $_memberID        會員編號
+     * @param  int      $_shoporderID     訂單編號
+     * @param  int      $_payID           付款編號(第1張單傳Null 剩餘傳回傳值)
+     * @param  int      $_payType         付款種類
+     * @param  int      $_payPrice        付款金額
+     */
+    public function getMemberShopPay($_memberID, $_shoporderID, $_payID, $_payType, $_payPrice){
+        return DB::select($this->contStr. "EXEC SSP_MemberShopPayAdd
+                                            @_memberID=?, @_shoporderID=?, @_payID=?, @_payType=?, @_payPrice=?",
+            array($_memberID, $_shoporderID, $_payID, $_payType, $_payPrice));
+    }
 
-
+    /**
+     * 會員付款結帳-廠商回送資訊
+     * @param  int      $_memberID        會員編號
+     * @param  int      $_payID           付款編號
+     * @param  int      $_Status          付款狀態
+     * @param  string   $_AgentNo         廠商付款編號
+     * @param  string   $_Name            消費者姓名
+     * @param  int      $_ApproveCode     交易授權碼
+     * @param  int      $_CardNo          授權卡號後 4 碼
+     * @param  string   $_ErrCode         回覆代碼
+     * @param  string   $_ErrMsg          回覆代碼解釋
+     * @param  string   $_InvoiceNo       發票號碼
+     */
+    public function updateMemberShopPay($_memberID, $_payID, $_Status, $_AgentNo, $_Name, $_ApproveCode, $_CardNo, $_ErrCode, $_ErrMsg, $_InvoiceNo){
+        return DB::select($this->contStr. "EXEC SSP_MemberShopPayAdd @_memberID=?, @_payID=?, @_Status=?, @_AgentNo=?, @_Name=?, @_ApproveCode=?, @_CardNo=?, @_ErrCode=?, @_ErrMsg=?, @_InvoiceNo=?",
+            array($_memberID, $_payID, $_Status, $_AgentNo, $_Name, $_ApproveCode, $_CardNo, $_ErrCode, $_ErrMsg, $_InvoiceNo));
+    }
 
     /**
      * 後台取得會員訂單清單-總數
@@ -118,69 +155,4 @@ class shop_repository{
                                             @_minmemberID=?, @_memberID=?, @_downType=?, @_startDate=?, @_endDate=?, @_row=?, @_page=?",
             array($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page));
     }
-
-    /**
-     * 後台取得會員藏蛋清單-總數
-     * @param  int  $_minmemberID 搜尋者的編號
-     * @param  int  $_memberID    被搜尋者的編號
-     * @param  int  $_downType    是否搜尋下線
-     * @param  date $_startDate   開始時間
-     * @param  date $_endDate     結束時間
-     * @param  int  $_row         行數
-     * @param  int  $_page        頁數
-     */
-    public function getRebateListCount($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page){
-        return DB::select($this->contStr. "EXEC SSP_MemberRebateListCount
-                                            @_minmemberID=?, @_memberID=?, @_downType=?, @_startDate=?, @_endDate=?, @_row=?, @_page=?",
-            array($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page));
-    }
-
-    /**
-     * 後台取得會員藏蛋清單-取資料
-     * @param  int  $_minmemberID 搜尋者的編號
-     * @param  int  $_memberID    被搜尋者的編號
-     * @param  int  $_downType    是否搜尋下線
-     * @param  date $_startDate   開始時間
-     * @param  date $_endDate     結束時間
-     * @param  int  $_row         行數
-     * @param  int  $_page        頁數
-     */
-    public function getRebateListSearch($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page){
-        return DB::select($this->contStr. "EXEC SSP_MemberRebateListSearch
-                                            @_minmemberID=?, @_memberID=?, @_downType=?, @_startDate=?, @_endDate=?, @_row=?, @_page=?",
-            array($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page));
-    }
-
-    /**
-     * 後台取得會員藏蛋清單-總數
-     * @param  int  $_minmemberID 搜尋者的編號
-     * @param  int  $_memberID    被搜尋者的編號
-     * @param  int  $_downType    是否搜尋下線
-     * @param  date $_startDate   開始時間
-     * @param  date $_endDate     結束時間
-     * @param  int  $_row         行數
-     * @param  int  $_page        頁數
-     */
-    public function getBackListCount($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page){
-        return DB::select($this->contStr. "EXEC SSP_MemberBackListCount
-                                            @_minmemberID=?, @_memberID=?, @_downType=?, @_startDate=?, @_endDate=?, @_row=?, @_page=?",
-            array($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page));
-    }
-
-    /**
-     * 後台取得會員藏蛋清單-取資料
-     * @param  int  $_minmemberID 搜尋者的編號
-     * @param  int  $_memberID    被搜尋者的編號
-     * @param  int  $_downType    是否搜尋下線
-     * @param  date $_startDate   開始時間
-     * @param  date $_endDate     結束時間
-     * @param  int  $_row         行數
-     * @param  int  $_page        頁數
-     */
-    public function getBackListSearch($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page){
-        return DB::select($this->contStr. "EXEC SSP_MemberBackListSearch
-                                            @_minmemberID=?, @_memberID=?, @_downType=?, @_startDate=?, @_endDate=?, @_row=?, @_page=?",
-            array($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page));
-    }
-
 }

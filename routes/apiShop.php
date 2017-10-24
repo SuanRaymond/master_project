@@ -24,8 +24,13 @@ Route::post('/CommodityOrderUpdate', 'commodityOrder@update');
 //修改會員訂單
 Route::post('/CommodityOrderList', 'commodityOrder@list');
 
+//會員訂單信用卡付款
+Route::post('/PayCard', 'commodityOrder@payCard');
+
 //取購物車商品
 Route::post('/GetShopltemCar', 'getShopltemCar@index');
 
 //簡易會員資料
 Route::post('/DetailSimple', 'detailSimple@index');
+
+

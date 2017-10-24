@@ -93,6 +93,11 @@ class api_respone_services
 					$OutPut_Array['OddsDetail'] = $_system->oddsDetail;
 					break;
 
+				/*信用卡*/
+				case 'PayCard':
+					$OutPut_Array['PayDetail'] = $_system->payDetail;
+					break;
+
 				/*後台使用*/
 				case 'Ctrl':
 					$OutPut_Array['Data'] = $_system->data;
