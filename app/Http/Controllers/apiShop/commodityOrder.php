@@ -203,7 +203,7 @@ class commodityOrder extends Controller
         $this->system->payDetail->email     = $this->system->member->mmail;
         $this->system->payDetail->note1     = "";
         $this->system->payDetail->note2     = "";
-        $this->system->payDetail->Card_Type = 0;
+        $this->system->payDetail->Card_Type = 1;///////////test
 
         with(new api_respone_services())->reAPI(0, $this->system);
     }
