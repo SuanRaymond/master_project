@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
          //引用Support 自定義輔助方法
         include_once(app_path('Support/Helpers/Helpers.php'));
+        include_once(app_path('Support/Helpers/Points.php'));
     }
 
     /**
