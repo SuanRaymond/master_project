@@ -165,7 +165,7 @@ class commodityOrder extends Controller
         }
 
         //轉台幣 四捨五入 取整數
-        $MN = 1;/////round($MN * 31);
+        $MN = 2;/////round($MN * 31);
 
         foreach($shopOrderID as $key => $value){
             $db = with(new shop_repository())->getMemberShopPay($this->system->memberID, $value, $payID, 0, $MN);
@@ -198,9 +198,9 @@ class commodityOrder extends Controller
         $this->system->payDetail->MN        = $MN;
         $this->system->payDetail->OrderInfo = "FunMugle商城購物";
         $this->system->payDetail->Td        = $payID;
-        $this->system->payDetail->sna       = $this->system->member->mname;
-        $this->system->payDetail->sdt       = $this->system->member->maccount;
-        $this->system->payDetail->email     = $this->system->member->mmail;
+        $this->system->payDetail->sna       = "";
+        $this->system->payDetail->sdt       = "";
+        $this->system->payDetail->email     = "";
         $this->system->payDetail->note1     = "";
         $this->system->payDetail->note2     = "";
         $this->system->payDetail->Card_Type = 1;///////////test
