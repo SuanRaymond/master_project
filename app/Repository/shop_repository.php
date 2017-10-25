@@ -110,18 +110,28 @@ class shop_repository{
      * 會員付款結帳-廠商回送資訊
      * @param  int      $_memberID        會員編號
      * @param  int      $_payID           付款編號
-     * @param  int      $_Status          付款狀態
-     * @param  string   $_AgentNo         廠商付款編號
-     * @param  string   $_Name            消費者姓名
-     * @param  int      $_ApproveCode     交易授權碼
-     * @param  int      $_CardNo          授權卡號後 4 碼
-     * @param  string   $_ErrCode         回覆代碼
-     * @param  string   $_ErrMsg          回覆代碼解釋
-     * @param  string   $_InvoiceNo       發票號碼
+     * @param  int      $_status          付款狀態
+     * @param  string   $_payCardID       廠商付款編號
+     * @param  string   $_name            消費者姓名
+     * @param  int      $_cardKeyCode     交易授權碼
+     * @param  int      $_cardNo          授權卡號後 4 碼
+     * @param  string   $_errCode         回覆代碼
+     * @param  string   $_errMsg          回覆代碼解釋
+     * @param  string   $_invoiceNo       發票號碼
+     * @param  string   $_logStatus       Log狀態（0.成功 1.失敗 2.商店代號錯誤 3.驗證碼錯誤 4.交易金額錯誤)
      */
-    public function updateMemberShopPay($_memberID, $_payID, $_Status, $_AgentNo, $_Name, $_ApproveCode, $_CardNo, $_ErrCode, $_ErrMsg, $_InvoiceNo){
-        return DB::select($this->contStr. "EXEC SSP_MemberShopPayAdd @_memberID=?, @_payID=?, @_Status=?, @_AgentNo=?, @_Name=?, @_ApproveCode=?, @_CardNo=?, @_ErrCode=?, @_ErrMsg=?, @_InvoiceNo=?",
-            array($_memberID, $_payID, $_Status, $_AgentNo, $_Name, $_ApproveCode, $_CardNo, $_ErrCode, $_ErrMsg, $_InvoiceNo));
+    public function addMemberShopPayLog($_payID, $_status, $_payCardID, $_name, $_cardKeyCode, $_cardNo, $_errCode, $_errMsg, $_invoiceNo, $_logStatus){
+        return DB::select($this->contStr. "EXEC SSP_MemberShopPayLog @_payID=?, @_status=?, @_payCardID=?, @_name=?, @_cardKeyCode=?, @_cardNo=?, @_errCode=?, @_errMsg=?, @_invoiceNo=?, @_logStatus=?",
+            array($_payID, $_status, $_payCardID, $_name, $_cardKeyCode, $_cardNo, $_errCode, $_errMsg, $_invoiceNo, $_logStatus));
+    }
+
+    /**
+     * 會員付款結帳-取付款資訊
+     * @param  int      $_payID           付款編號
+     */
+    public function getMemberShopGet($_payID){
+        return DB::select($this->contStr. "EXEC SSP_MemberShopGet @_payID=?",
+            array($_payID));
     }
 
     /**

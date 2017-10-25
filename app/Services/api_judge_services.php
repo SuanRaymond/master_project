@@ -121,7 +121,7 @@ class api_judge_services{
 					//上層帳號代碼是否輸入
 			    	if(isset($this->system->upmemberID)){
 			    		if(!is_numeric($this->system->upmemberID)){
-			    			$this->system->upmemberID = 0;
+			    			$this->system->upmemberID = 300101;
 			    		}
 			    	}
 					break;

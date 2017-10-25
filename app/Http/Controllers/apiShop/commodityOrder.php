@@ -48,6 +48,9 @@ class commodityOrder extends Controller
 
             foreach($db as $row){
                 $this->system->shoporderID->$index = $row->shoporderID;
+
+                //改訂購狀態
+                with(new shop_repository())->updateMemberCommodityOrder($this->system->memberID, $row->shoporderID, 0);
             }
         }
 
