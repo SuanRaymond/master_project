@@ -138,7 +138,7 @@ class commodityOrder extends Controller
     /**
         登入
         1、從前端接收POST資訊，需取得：
-            A：Params：加密後的資料JSON（{"MemberID":"會員編號","ShopOrderID":{"0":"訂單編號","1":"訂單編號"}}）
+            A：Params：加密後的資料JSON（{"MemberID":"會員編號","CardType":"0.信用卡 1.銀聯卡",ShopOrderID":{"0":"訂單編號","1":"訂單編號"}}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、比對帳號是否合法
@@ -204,7 +204,7 @@ class commodityOrder extends Controller
         $this->system->payDetail->email     = "";
         $this->system->payDetail->note1     = "";
         $this->system->payDetail->note2     = "";
-        $this->system->payDetail->Card_Type = 1;///0;
+        $this->system->payDetail->Card_Type = $this->system->cardtype;
 
         with(new api_respone_services())->reAPI(0, $this->system);
     }
