@@ -165,7 +165,8 @@ class commodityOrder extends Controller
         }
 
         //轉台幣 四捨五入 取整數
-        $MN = round($MN * 31);
+        //$MN = round($MN * 31);
+        $MN = round($MN);////////test
 
         foreach($shopOrderID as $key => $value){
             $db = with(new shop_repository())->getMemberShopPay($this->system->memberID, $value, $payID, 0, $MN);
@@ -203,7 +204,7 @@ class commodityOrder extends Controller
         $this->system->payDetail->email     = "";
         $this->system->payDetail->note1     = "";
         $this->system->payDetail->note2     = "";
-        $this->system->payDetail->Card_Type = 1;///////////test
+        $this->system->payDetail->Card_Type = 0;
 
         with(new api_respone_services())->reAPI(0, $this->system);
     }
