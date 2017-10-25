@@ -102,7 +102,7 @@ class payCard extends Controller
                                                                $this->system->params->name, $this->system->params->cardKeyCode,
                                                                $this->system->params->cardNo, $this->system->params->errcode,
                                                                $this->system->params->errmsg, $this->system->params->invoiceNo, 0);
-        dd($db);
+
         //改訂購狀態
         foreach($db as $row){
             with(new shop_repository())->updateMemberCommodityOrder($row->memberID, $row->shopOrderID, 1);
