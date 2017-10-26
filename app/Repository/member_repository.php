@@ -233,6 +233,15 @@ class member_repository{
         return DB::select($this->contStr. "EXEC SSP_MemberVerificationDateUpdate @_memberID=?, @_verification=?", array($_memberID,  $_verification));
     }
 
+    /**
+     * 取得匯率
+     * @param  int      $_buyID      幣別種類
+     * @param  int      $_buyType    0.買進 1.賣出
+     */
+    public function getBuyInOut($_buyID, $_buyType){
+        return DB::select($this->contStr. "EXEC SSP_MemberBuyInOut @_buyID=?, @_buyType=?", array($_buyID, $_buyType));
+    }
+
 
     /**
      * 藏蛋返利清單

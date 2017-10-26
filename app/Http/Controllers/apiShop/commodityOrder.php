@@ -164,8 +164,17 @@ class commodityOrder extends Controller
             }
         }
 
+        $db = with(new member_repository())->getBuyInOut(1, 0);
+        $buyIn = 0;
+
+        foreach($db as $row){
+            $buyIn = $row->bIn;
+        }
+
+
         //轉台幣 四捨五入 取整數
-        $MN = round($MN);
+        $MN = round($MN * $buyIn);
+        $MN = str_replace(',', '', rtrim(rtrim(number_format($MN, 4), '0'), '.'));
 
         foreach($shopOrderID as $key => $value){
             $db = with(new shop_repository())->getMemberShopPay($this->system->memberID, $value, $payID, 0, $MN);
