@@ -165,8 +165,7 @@ class commodityOrder extends Controller
         }
 
         //轉台幣 四捨五入 取整數
-        //$MN = round($MN * 31);
-        $MN = round($MN);////////test
+        $MN = round($MN);
 
         foreach($shopOrderID as $key => $value){
             $db = with(new shop_repository())->getMemberShopPay($this->system->memberID, $value, $payID, 0, $MN);
