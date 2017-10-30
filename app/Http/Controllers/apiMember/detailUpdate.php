@@ -25,7 +25,7 @@ class detailUpdate extends Controller
         1、從前端接收POST資訊，需取得：
             A：Params：加密後的資料JSON
             （{"MemberID":"會員唯一碼","Name":"暱稱","Mail":"信箱","Address":"地址","Birthday":"生日","Gender":"性別",
-                "LanguageID":"語言","CardID":"卡號"}）
+                "LanguageID":"語言","BankName":"銀行姓名","Bank":"銀行名稱","BankID":"銀行代號","CardID":"卡號"}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
         3、密碼加密
@@ -37,7 +37,7 @@ class detailUpdate extends Controller
     public function index()
     {
     	$this->system->action = '[judge]';
-        $this->system = with(new api_judge_services($this->system))->check(['CMID','CMN', 'CMM', 'CMAD', 'CMB', 'CMGD', 'CML', 'CMC']);
+        $this->system = with(new api_judge_services($this->system))->check(['CMID','CMN', 'CMM', 'CMAD', 'CMB', 'CMGD', 'CML', 'CMBC']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
@@ -45,7 +45,8 @@ class detailUpdate extends Controller
         $db = with(new member_repository())
                 ->updateMemberDetail($this->system->memberID, $this->system->name, $this->system->mail,
                                     $this->system->address, $this->system->birthday,$this->system->gender,
-                                    $this->system->languageID, $this->system->cardID);
+                                    $this->system->languageID, $this->system->bankName, $this->system->bank,
+                                    $this->system->bankID, $this->system->cardID);
 
         if(empty($db)){
             with(new api_respone_services())->reAPI(500, $this->system);

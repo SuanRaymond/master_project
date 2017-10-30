@@ -96,11 +96,15 @@ class member_repository{
      * @param  string   $_birthday      生日
      * @param  int      $_gender        性別
      * @param  int      $_languageID    語言
+     * @param  string   $_bankName      銀行姓名
+     * @param  string   $_bank          銀行名稱
+     * @param  string   $_bankID        銀行代號
      * @param  string   $_cardID        卡號
+     *
      */
-    public function updateMemberDetail($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_cardID){
-        return DB::select($this->contStr. "EXEC SSP_MemberDetailUpdate @_memberID=?, @_name=?, @_mail=?, @_address=?, @_birthday=?, @_gender=?, @_languageID=?, @_cardID=?", 
-            array($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_cardID));
+    public function updateMemberDetail($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_bankName, $_bank, $_bankID, $_cardID){
+        return DB::select($this->contStr. "EXEC SSP_MemberDetailUpdate @_memberID=?, @_name=?, @_mail=?, @_address=?, @_birthday=?, @_gender=?, @_languageID=?, @_bankName=?, @_bank=?, @_bankID=?, @_cardID=?", 
+            array($_memberID, $_name, $_mail, $_address, $_birthday, $_gender, $_languageID, $_bankName, $_bank, $_bankID, $_cardID));
     }
 
     /**

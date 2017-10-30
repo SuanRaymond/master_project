@@ -202,7 +202,7 @@ class api_judge_services{
 			    	}
 					break;
 
-				case 'CMC':
+				case 'CMBC':
 					//卡號是否為數字
 			    	if(isset($this->system->cardID)){
 			    		if($this->system->cardID != '')
@@ -212,6 +212,13 @@ class api_judge_services{
 			    			}
 			    		}
 			    	}
+		    		if(($this->system->bankName == '' && $this->system->bank == '' && $this->system->bankID == '' && $this->system->cardID == '') ||($this->system->bankName != '' && $this->system->bank != '' && $this->system->bankID != '' && $this->system->cardID != ''))
+		    		{
+		    		}
+	    			else{
+	    				return $this->respone(251);
+	    			}
+
 					break;
 
 				case 'CPWON':
