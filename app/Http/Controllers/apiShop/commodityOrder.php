@@ -49,6 +49,10 @@ class commodityOrder extends Controller
             foreach($db as $row){
                 $this->system->shoporderID->$index = $row->shoporderID;
 
+                if(empty($row->result != 0)){
+                    with(new api_respone_services())->reAPI(540, $this->system);
+                }
+
                 //改訂購狀態
                 with(new shop_repository())->updateMemberCommodityOrder($this->system->memberID, $row->shoporderID, 0);
             }

@@ -242,7 +242,6 @@ class member_repository{
         return DB::select($this->contStr. "EXEC SSP_MemberBuyInOut @_buyID=?, @_buyType=?", array($_buyID, $_buyType));
     }
 
-
     /**
      * 藏蛋返利清單
      * @param  int $_memberID 會員編號
