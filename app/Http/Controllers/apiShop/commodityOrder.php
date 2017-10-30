@@ -195,6 +195,9 @@ class commodityOrder extends Controller
                 else if($row->result == 4){
                     with(new api_respone_services())->reAPI(543, $this->system);
                 }
+                else{
+                    with(new api_respone_services())->reAPI($row->result, $this->system);
+                }
             }
         }
 
