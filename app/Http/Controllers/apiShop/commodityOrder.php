@@ -49,17 +49,8 @@ class commodityOrder extends Controller
             foreach($db as $row){
                 $this->system->shoporderID->$index = $row->shoporderID;
 
-                if($row->result == 1){
-                    with(new api_respone_services())->reAPI(546, $this->system);
-                }
-                else if($row->result == 2){
-                    with(new api_respone_services())->reAPI(547, $this->system);
-                }
-                else if($row->result == 3){
-                    with(new api_respone_services())->reAPI(548, $this->system);
-                }
-                else if($row->result == 4){
-                    with(new api_respone_services())->reAPI(549, $this->system);
+                if($row->result != 0){
+                    with(new api_respone_services())->reAPI(540, $this->system);
                 }
 
                 //改訂購狀態
