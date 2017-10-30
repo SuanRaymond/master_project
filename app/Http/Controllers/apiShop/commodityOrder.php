@@ -158,11 +158,9 @@ class commodityOrder extends Controller
         $MN = 0;
         $payID = NULL;
         $shopOrderID = $this->system->shoporderID;
-
         //計算總金額
         foreach($shopOrderID as $key => $value){
             $db = with(new shop_repository())->getMemberCommodityOrderDetail($value);
-
             foreach($db as $row){
                 $MN += $row->totalPrice;
             }
@@ -174,7 +172,6 @@ class commodityOrder extends Controller
         foreach($db as $row){
             $buyIn = $row->bIn;
         }
-
 
         //轉台幣 四捨五入 取整數
         $MN = round($MN * $buyIn);
