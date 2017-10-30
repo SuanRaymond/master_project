@@ -59,7 +59,7 @@ class detailUpdate extends Controller
         $this->system->sendParams['Birthday']       = $this->system->birthday;
         $this->system->sendParams['Gender']         = $this->system->gender;
         $this->system->sendParams['LanguageID']     = $this->system->languageID;
-        $this->system->sendParams['BankName']       = $this->system->bankName;
+        $this->system->sendParams['BankName']       = $this->system->bankname;
         $this->system->sendParams['Bank']           = $this->system->bank;
         $this->system->sendParams['BankID']         = $this->system->bankID;
         $this->system->sendParams['CardID']         = $this->system->cardID;

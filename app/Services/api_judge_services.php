@@ -52,7 +52,19 @@ class api_judge_services{
 			     		return $this->respone(123);
 			     	}
 			     	if(!preg_match("/^([0-9]+)$/", $this->system->account)){
-			    		return $this->respone(133);
+			    		return $this->respone(124);
+					}
+					//10碼：台灣
+					if((strlen($this->system->account) == 10) && substr($this->system->account, 0, 1) == 0){
+					}
+					//11碼：大陸
+					else if((strlen($this->system->account) == 11) && substr($this->system->account, 0, 1) == 1){
+					}
+					//8碼：香港
+					else if((strlen($this->system->account) == 8) && substr($this->system->account, 0, 1) == 5){
+					}
+					else{
+						return $this->respone(125);
 					}
 					break;
 				case 'CPW':
@@ -212,7 +224,7 @@ class api_judge_services{
 			    			}
 			    		}
 			    	}
-		    		if(($this->system->bankName == '' && $this->system->bank == '' && $this->system->bankID == '' && $this->system->cardID == '') ||($this->system->bankName != '' && $this->system->bank != '' && $this->system->bankID != '' && $this->system->cardID != ''))
+		    		if(($this->system->bankname == '' && $this->system->bank == '' && $this->system->bankID == '' && $this->system->cardID == '') ||($this->system->bankname != '' && $this->system->bank != '' && $this->system->bankID != '' && $this->system->cardID != ''))
 		    		{
 		    		}
 	    			else{
