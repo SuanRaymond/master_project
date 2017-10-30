@@ -26,7 +26,7 @@ class entrance extends Controller
         $this->system->reKey       = '';
         //是否開啟開發模式
         $this->system->deBugMode    = false;
-        if(config('app.debug') == true && env('USETYPE') == 'LOCAL'){
+        if(config('app.debug') == true && config('app.useType') == 'LOCAL'){
             $this->system->deBugMode = true;
         }
     }

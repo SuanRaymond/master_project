@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'useType' => env('USETYPE', 'ONLINE'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
