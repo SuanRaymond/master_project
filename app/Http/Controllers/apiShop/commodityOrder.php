@@ -179,7 +179,7 @@ class commodityOrder extends Controller
         $MN = str_replace(',', '', rtrim(rtrim(number_format($MN, 4), '0'), '.'));
 
         foreach($shopOrderID as $key => $value){
-            $db = with(new shop_repository())->getMemberShopPay($this->system->memberID, $value, $payID, 0, $MN);
+            $db = with(new shop_repository())->getMemberShopPay($this->system->memberID, $value, $payID, $this->system->cardtype, $MN);
 
             foreach($db as $row){
                 $payID = $row->payID;
