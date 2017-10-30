@@ -161,6 +161,7 @@ class commodityOrder extends Controller
         //計算總金額
         foreach($shopOrderID as $key => $value){
             $db = with(new shop_repository())->getMemberCommodityOrderDetail($value);
+
             foreach($db as $row){
                 $MN += $row->totalPrice;
             }
@@ -182,8 +183,17 @@ class commodityOrder extends Controller
 
             foreach($db as $row){
                 $payID = $row->payID;
-                if($row->result != 0){
+                if($row->result == 1){
                     with(new api_respone_services())->reAPI(540, $this->system);
+                }
+                else if($row->result == 2){
+                    with(new api_respone_services())->reAPI(541, $this->system);
+                }
+                else if($row->result == 3){
+                    with(new api_respone_services())->reAPI(542, $this->system);
+                }
+                else if($row->result == 4){
+                    with(new api_respone_services())->reAPI(543, $this->system);
                 }
             }
         }
@@ -196,10 +206,10 @@ class commodityOrder extends Controller
         }
 
         if($MN == 0){
-            with(new api_respone_services())->reAPI(541, $this->system);
+            with(new api_respone_services())->reAPI(544, $this->system);
         }
         if(is_null($payID)){
-            with(new api_respone_services())->reAPI(542, $this->system);
+            with(new api_respone_services())->reAPI(545, $this->system);
         }
 
         //將欄位名稱改變
