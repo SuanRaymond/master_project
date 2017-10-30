@@ -49,7 +49,7 @@ class commodityOrder extends Controller
             foreach($db as $row){
                 $this->system->shoporderID->$index = $row->shoporderID;
 
-                if(empty($row->result != 0)){
+                if($row->result != 0){
                     with(new api_respone_services())->reAPI(540, $this->system);
                 }
 

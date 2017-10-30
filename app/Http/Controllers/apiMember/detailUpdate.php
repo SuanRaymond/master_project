@@ -44,7 +44,7 @@ class detailUpdate extends Controller
 
         $db = with(new member_repository())
                 ->updateMemberDetail($this->system->memberID, $this->system->name, $this->system->mail,
-                                    $this->system->address, $this->system->birthday,$this->system->gender, 
+                                    $this->system->address, $this->system->birthday,$this->system->gender,
                                     $this->system->languageID, $this->system->cardID);
 
         if(empty($db)){
@@ -75,7 +75,7 @@ class detailUpdate extends Controller
         5、輸出完整資料
         {"Result":0}
      */
-    
+
     public function photoUpdate()
     {
         $this->system->action = '[judge]';
