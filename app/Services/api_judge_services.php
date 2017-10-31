@@ -63,6 +63,9 @@ class api_judge_services{
 					//8碼：香港
 					else if((strlen($this->system->account) == 8) && substr($this->system->account, 0, 1) == 5){
 					}
+					//5碼：股東
+					else if((strlen($this->system->account) == 6) && substr($this->system->account, 0, 1) == 3){
+					}
 					else{
 						return $this->respone(125);
 					}
