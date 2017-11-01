@@ -92,3 +92,11 @@ Route::post('/GetRebateTaskScratchCard', 'rebateTask@scratchCard');
 // //保持登入
 // Route::post('/SetLog', 'info\setLoginInfo@index');
 
+
+/****** 會員資訊 ******/
+//忘記密碼－送出驗證碼
+Route::post('/ForgetPasswordSend', 'account\forgetPassword@send');
+//忘記密碼－更新密碼
+Route::post('/ForgetPasswordChange', 'account\forgetPassword@change');
+
+/****** 會員資訊 ******/

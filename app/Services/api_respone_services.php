@@ -36,6 +36,8 @@ class api_respone_services
 				case 'VerificationCheck':
 				case 'VerificationReSend':
 				case 'CheckinRebateTask':
+				case 'ForgetPasswordSend':
+				case 'ForgetPasswordChange':
 					$OutPut_Array['Result'] = $_system->result;
 					break;
 				case 'SetLoginInfo':

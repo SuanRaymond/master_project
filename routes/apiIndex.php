@@ -65,3 +65,11 @@ Route::post('/CheckinRebateTask', 'rebateTask@checkin');
 
 //今日刮刮卡
 Route::post('/GetRebateTaskScratchCard', 'rebateTask@scratchCard');
+
+/****** 會員資訊 ******/
+//忘記密碼－送出驗證碼
+Route::post('/ForgetPasswordSend', 'account\forgetPassword@send');
+//忘記密碼－更新密碼
+Route::post('/ForgetPasswordChange', 'account\forgetPassword@change');
+
+/****** 會員資訊 ******/

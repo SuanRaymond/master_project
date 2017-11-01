@@ -88,7 +88,7 @@ class member_repository{
     }
 
     /**
-     * 修改會員資料   
+     * 修改會員資料
      * @param  int      $_memberID      會員編號
      * @param  string   $_name          暱稱
      * @param  string   $_mail          信箱
@@ -144,6 +144,24 @@ class member_repository{
         return DB::update($this->contStr. "EXEC SSP_MemberPasswordErrprCountClear @_memberID=?", array($_memberID));
     }
 
+    /**
+     * 忘記密碼－寫入驗證碼
+     * @param  int      $_memberID  會員編號
+     * @param  string   $_code      驗證碼
+     */
+    public function setFrogetPasswordCode($_memberID, $_code){
+        return DB::update($this->contStr. "EXEC SSP_FrogetPasswordCodeSet @_memberID=?, @_code=?", array($_memberID, $_code));
+    }
+
+    /**
+     * 忘記密碼－查證驗證碼
+     * @param  int      $_memberID  會員編號
+     * @param  string   $_code      驗證碼
+     */
+    public function setFrogetPasswordPassword($_memberID, $_code, $_password){
+        return DB::select($this->contStr. "EXEC SSP_FrogetPasswordPasswordSet @_memberID=?, @_code=?, @_password=?",
+            array($_memberID, $_code, $_password));
+    }
 
     /**
      * 查詢會員詳細資料

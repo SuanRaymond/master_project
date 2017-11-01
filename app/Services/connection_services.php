@@ -59,4 +59,26 @@ class connection_services{
 		}
 		return $OutData;
 	}
+
+	/**
+	 * 送出簡訊
+	 * @param  string 	$_msg   訊息
+	 * @param  int 		$_phone 電話
+	 */
+	public function sendSMS($_msg, $_phone)
+	{
+        $postArray = http_build_query(
+            array(
+                'username'  => env('SEND_MAIL_ACCOUNT'),
+                'password'  => env('SEND_MAIL_PASSWORD'),
+                'method'    => 1,
+                'sms_msg'   => $_msg,
+                'phone'     => $_phone,
+                'send_date' => date('Y/m/d'),
+                'hour'      => date('H'),
+                'min'       => date('i'),
+        ));
+
+        return $this->sendHTTP(env('SEND_MAIL_URL'), $postArray);
+	}
 }

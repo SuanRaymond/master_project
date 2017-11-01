@@ -74,20 +74,9 @@ class verificationReSend extends Controller
 
         //發送驗證碼
         $msg = '感谢您在 FunMugle 注册会员，您的验证码为『'. $this->system->verification. '』请立即输入验证，谢谢。';
-        $this->system->postArray   = http_build_query(
-            array(
-                'username'  => env('SEND_MAIL_ACCOUNT'),
-                'password'  => env('SEND_MAIL_PASSWORD'),
-                'method'    => 1,
-                'sms_msg'   => $msg,
-                'phone'     => $this->system->member->maccount,
-                'send_date' => date('Y/m/d'),
-                'hour'      => date('H'),
-                'min'       => date('i'),
-        ));
+        with(new connection_services())->sendSMS($msg, $this->system->member->maccount);
 
         $this->system->result = 0;
-        with(new connection_services())->sendHTTP(env('SEND_MAIL_URL'), $this->system->postArray);
 
     	with(new api_respone_services())->reAPI(0, $this->system);
     }
