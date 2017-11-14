@@ -15,9 +15,10 @@ class shopOrderList extends Controller
     public $system;
 
     /**
-        取得訂閱報表
+        取得購買報表
         1、從前端接收POST資訊，需取得：
             A：Params：加密後的資料JSON（{"MineAccount":"搜尋者帳號","Account":"被搜尋者帳號","DownType":"是否搜尋下層",
+                                      "ShopType":"購買單狀態","MinPay":"最低購買金額","MaxPay":"最高購買金額",
                                       "StartDate":"開始時間","EndDate":"結束時間","Row":"取得幾行","Page":"第幾頁"}）
             B：Sign：驗證碼
         2、將資訊經由 entrance （確認資料完整性、驗證、比對）
@@ -35,13 +36,14 @@ class shopOrderList extends Controller
     public function index()
     {
         $this->system->action = '[judge]';
-        $this->system = with(new api_judge_services($this->system))->check(['SMLC-ID']);
+        $this->system = with(new api_judge_services($this->system))->check(['SMLC-ID', 'CSHOPTYPE', 'CPAY']);
         if($this->system->status != 0){
             with(new api_respone_services())->reAPI($this->system->status, $this->system);
         }
 
         $db = with(new shop_repository())->
               getOrderListCount($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
+                                $this->system->shoptype, $this->system->minpay, $this->system->maxpay,
                                 $this->system->start, $this->system->end, $this->system->row, $this->system->page);
 
         $count                       = 0;
@@ -53,6 +55,7 @@ class shopOrderList extends Controller
         if($count > 0){
             $db = with(new shop_repository())->
               getOrderListSearch($this->system->mineMemberID, $this->system->memberID, $this->system->downtype,
+                                $this->system->shoptype, $this->system->minpay, $this->system->maxpay,
                                 $this->system->start, $this->system->end, $this->system->row, $this->system->page);
 
             foreach($db as $key => $row){
@@ -61,7 +64,6 @@ class shopOrderList extends Controller
         }
 
         $this->system->shopOrderList['count'] = $count;
-
         with(new api_respone_services())->reAPI(0, $this->system);
     }
 }

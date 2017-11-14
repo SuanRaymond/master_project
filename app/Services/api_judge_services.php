@@ -289,6 +289,45 @@ class api_judge_services{
         			}
 					break;
 
+				/************** 後台專用 確認 輸入 資訊 **************/
+				case 'CSHOPTYPE':
+					//狀態是否輸入
+			        if(!isset($this->system->shoptype)){
+			            $this->system->shoptype = null;
+			        }
+			        else{
+			        	if(!is_numeric($this->system->shoptype)){
+		    				return $this->respone(280);
+		    			}
+			        }
+			        if($this->system->shoptype == -1){
+			        	$this->system->shoptype = null;
+			        }
+					break;
+				case 'CPAY':
+					//購買金額是否輸入
+			        if(!isset($this->system->minpay)){
+			            $this->system->minpay = null;
+			        }
+			        else{
+			        	if(!is_numeric($this->system->minpay)){
+		    				return $this->respone(290);
+		    			}
+			        }
+			        if(!isset($this->system->maxpay)){
+			            $this->system->maxpay = null;
+			        }
+			        else{
+			        	if(!is_numeric($this->system->maxpay)){
+		    				return $this->respone(291);
+		    			}
+			        }
+					break;
+
+				/************** 後台專用 確認 輸入 資訊 **************/
+
+
+
 				/************** 確認 資料庫 資訊 **************/
 				case 'SMG':
 					//取得會員資料
@@ -328,6 +367,10 @@ class api_judge_services{
 					}
 					break;
 				case 'SMLC-ID':
+					if(!isset($this->system->account)){
+						$this->system->minnull = 1;
+						$this->system->account = $this->system->mineaccount;
+					}
 					//先取得兩方ID
 					$db = $member_repository->getMinAndMemberMemberID($this->system->mineaccount, $this->system->account);
 					if(empty($db)){
@@ -364,6 +407,9 @@ class api_judge_services{
 					//判斷是不是管理層
 					if($this->system->mineGroupID < 200){
 						$this->system->mineMemberID = null;
+						if($this->system->minnull == 1){
+							$this->system->memberID = null;
+						}
 					}
 					else{
 						//判斷階層

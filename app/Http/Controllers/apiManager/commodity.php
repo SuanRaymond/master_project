@@ -15,7 +15,7 @@ class commodity extends Controller
     public $system;
 
     /**
-        登入
+        新增商品
         1、從前端接收POST資訊，需取得：
             A：Params：加密後的資料JSON（{"Title":"標題","SubTitle":"副標","MenuID":"商品類別ID", "Price":"售價", "Points":"積分", "Transport":"運費", "Quantity":"數量", "Style":"風格", "Detail":"商品說明", "Norm":"規格", "Memo":"備註"}）
             B：Sign：驗證碼

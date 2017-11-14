@@ -136,33 +136,44 @@ class shop_repository{
 
     /**
      * 後台取得會員訂單清單-總數
-     * @param  int  $_minmemberID 搜尋者的編號
-     * @param  int  $_memberID    被搜尋者的編號
-     * @param  int  $_downType    是否搜尋下線
-     * @param  date $_startDate   開始時間
-     * @param  date $_endDate     結束時間
-     * @param  int  $_row         行數
-     * @param  int  $_page        頁數
+     * @param  int      $_minmemberID 搜尋者的編號
+     * @param  int      $_memberID    被搜尋者的編號
+     * @param  int      $_downType    是否搜尋下線
+     * @param  int      $_shopType    單的狀態
+     * @param  float    $_minPay      最低購買
+     * @param  float    $_maxPay      最高購買
+     * @param  date     $_startDate   開始時間
+     * @param  date     $_endDate     結束時間
+     * @param  int      $_row         行數
+     * @param  int      $_page        頁數
      */
-    public function getOrderListCount($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page){
+    public function getOrderListCount($_minmemberID, $_memberID, $_downType, $shopType, $_minPay, $_maxPay, $_startDate, $_endDate, $_row, $_page){
         return DB::select($this->contStr. "EXEC SSP_ShopOrderListCount
-                                            @_minmemberID=?, @_memberID=?, @_downType=?, @_startDate=?, @_endDate=?, @_row=?, @_page=?",
-            array($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page));
+                                            @_minmemberID=?, @_memberID=?, @_downType=?,
+                                            @_shopType=?, @_minPay=?, @_maxPay=?,
+                                            @_startDate=?, @_endDate=?, @_row=?, @_page=?",
+            array($_minmemberID, $_memberID, $_downType, $shopType, $_minPay, $_maxPay, $_startDate, $_endDate, $_row, $_page));
     }
 
     /**
      * 後台取得會員訂單清單-取資料
-     * @param  int  $_minmemberID 搜尋者的編號
-     * @param  int  $_memberID    被搜尋者的編號
-     * @param  int  $_downType    是否搜尋下線
-     * @param  date $_startDate   開始時間
-     * @param  date $_endDate     結束時間
-     * @param  int  $_row         行數
-     * @param  int  $_page        頁數
+     * @param  int      $_minmemberID 搜尋者的編號
+     * @param  int      $_memberID    被搜尋者的編號
+     * @param  int      $_downType    是否搜尋下線
+     * @param  int      $_shopType    單的狀態
+     * @param  float    $_minPay      最低購買
+     * @param  float    $_maxPay      最高購買
+     * @param  date     $_startDate   開始時間
+     * @param  date     $_endDate     結束時間
+     * @param  int      $_row         行數
+     * @param  int      $_page        頁數
      */
-    public function getOrderListSearch($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page){
+    public function getOrderListSearch($_minmemberID, $_memberID, $_downType, $shopType, $_minPay, $_maxPay, $_startDate, $_endDate, $_row, $_page){
         return DB::select($this->contStr. "EXEC SSP_ShopOrderListSearch
-                                            @_minmemberID=?, @_memberID=?, @_downType=?, @_startDate=?, @_endDate=?, @_row=?, @_page=?",
-            array($_minmemberID, $_memberID, $_downType, $_startDate, $_endDate, $_row, $_page));
+                                            @_minmemberID=?, @_memberID=?, @_downType=?,
+                                            @_shopType=?, @_minPay=?, @_maxPay=?,
+                                            @_startDate=?, @_endDate=?, @_row=?, @_page=?",
+            array($_minmemberID, $_memberID, $_downType, $shopType, $_minPay, $_maxPay, $_startDate, $_endDate, $_row, $_page));
     }
+
 }
