@@ -315,12 +315,12 @@ class member_repository{
 
     /**
      * 寫入刮刮卡 賽果
-     * @param  int    $_scratchID 卡號
+     * @param  int    $_backID    返利號
      * @param  int    $_type      刮刮樂種類
      * @param  string $_result    結果
      */
-    public function setRebateTaskScratchCardResult($_scratchID, $_type, $_result){
-        return DB::select($this->contStr. "EXEC SSP_RebateTaskScratchCardResult @_scratchID=?, @_type=?, @_result=?", array($_scratchID, $_type, $_result));
+    public function setRebateTaskScratchCardResult($_backID, $_type, $_result){
+        return DB::select($this->contStr. "EXEC SSP_RebateTaskScratchCardResult @_backID=?, @_type=?, @_result=?", array($_backID, $_type, $_result));
     }
 
         /**

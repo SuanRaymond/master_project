@@ -167,23 +167,29 @@ class rebateTask extends Controller
             with(new api_respone_services())->reAPI(500, $this->system);
         }
 
+        $this->system->backID = (object) array();
+        $this->system->moneyBack = 0;
+
        //將欄位名稱改變
         $this->system->action = '[reorderdata]';
         foreach($db as $row){
+            $key = $row->backID;
+            $this->system->backID->$key = $row->backID;
             $this->system->result = $row->result;
-            $this->system->moneyBack = $row->moneyBack;
+            $this->system->moneyBack += $row->moneyBack;
             $this->system->scratchID = $row->scratchID;
             $this->system->taskOdds = $row->taskOdds;
+
+            //未購買返利
+            if($this->system->result == 2){
+                with(new api_respone_services())->reAPI(533, $this->system);
+            }
+            //已返利過
+            else if($this->system->result == 3){
+                with(new api_respone_services())->reAPI(535, $this->system);
+            }
         }
 
-        //未購買返利
-        if($this->system->result == 2){
-            with(new api_respone_services())->reAPI(533, $this->system);
-        }
-        //已返利過
-        else if($this->system->result == 3){
-            with(new api_respone_services())->reAPI(535, $this->system);
-        }
 
         //8個獎項 3個相同即中獎
         if($this->system->type == 0){
@@ -260,10 +266,12 @@ class rebateTask extends Controller
             $this->system->oddsDetail->$index2 = (object) $oddsDetail2;
         }
 
+        $db = $this->system->backID;
 
-        //寫入賽果
-        with(new member_repository())->setRebateTaskScratchCardResult($this->system->scratchID, $this->system->type, json_encode($this->system->oddsDetail));
-
+        foreach($db as $row => $value){
+            //寫入賽果
+            with(new member_repository())->setRebateTaskScratchCardResult($value, $this->system->type, json_encode($this->system->oddsDetail));
+        }
         with(new api_respone_services())->reAPI(0, $this->system);
     }
 }
